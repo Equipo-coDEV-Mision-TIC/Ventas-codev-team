@@ -59,9 +59,18 @@ const Productos = () => {
     )
 }
 
-const TablaProductos = (listaProductos) =>{
+const TablaProductos = ({listaProductos}) =>{
     return(
-        <div>tabla de productos</div>
+        <table className='tabla'>
+            <thead>
+                <tr>
+                    <th>ID PRODUCTOS</th>
+                    <th>DESCRIPCION</th>
+                    <th>CATEGORIA</th>
+                    <th>VALOR UNITARIO</th>
+                </tr>
+            </thead>
+        </table>
     )
 }
 

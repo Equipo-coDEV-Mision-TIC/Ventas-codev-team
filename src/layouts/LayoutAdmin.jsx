@@ -5,10 +5,14 @@ import Sidebar from '../components/sidebar'
 const LayoutAdmin = ({children}) => {
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar/>
-            <main className='flex w-screen bg-green-50'>
-                {children}
-            </main>
+            <divgit add .
+            >
+                <Sidebar/>
+                <main className='flex w-screen bg-green-50'>
+                    {children}
+                </main>
+            </div>
+            
         </div>
     )
 }
