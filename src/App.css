@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+button{
+  z-index: 200;
+}
+
+ul{
+  list-style: none;
+  z-index: 100;
+}
+.LoginContainer{
+  width: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.mainContainer{
+  height: 100%;
+  width: 100%;
+}
+
+
+
+.rectanguloLogin {
+  background:#2F4A4E8F;
+  width: 980px;
+  height: 650px;
+  position:fixed;
+  top: 100px;
+  left: 500px;
+  border-radius: 86px;
+  border-color: black;
+  list-style: none
+}
+
+.seccionImagenLogin{
+  width: max-content;
+  height:min-content;
+}
+.rectanguloTransparente{
+  background:#FFFFFF;
+  width: 1786px;
+  height: 800px;
+  position:absolute;
+  top: 65px;
+  left: 65px;
+  border-radius: 86px;
+  border-color: black;
+  list-style: none;
+  opacity: 0.4;
+}
+
+
+.logo{
+  width: 400px;
+  height: 400px;
+  top: 230px;
+  left: 550px;
+  position:fixed;
+  opacity: 0.9;
+  background:none;
+  
+}
+
+.logoSB{
+  padding-bottom: 40px;
+  padding-left: 65px;
+}
+
+
+.styleUl1{
+  top: 100px;
+  position:fixed;
+  font-size: 30px;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  left: 20px;
+}
+
+.styleUl2{
+  left: 20px;
+  top: 680px;
+  position:fixed;
+  font-size: 30px;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color:white;
+}
+
+.buttonList{
+background-color: transparent;
+color:rgb(27, 20, 7);
+width: 250px;
+height: 50px;
+border-color: transparent;
+font-size: 25px;
+font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+cursor: pointer;
+}
+
+.buttonList:hover{
+  background-color:rgb(180, 240, 180);
+  border-radius: 5px;
+  font-size: 30px;
+  color:rgb(87, 83, 83);
+}
+.cuadrodetexto{
+  position:fixed;
+  width: 800px;
+  height: 50px;
+  border-radius: 30px;
+  border-color: transparent;
+  font-size: 40px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font: bolder;
+  left:700px;
+  top: 80px;
+}
+.fondoSB{
+  background-image: url(./media/fondoSideBar2.jpg)
+}
+
+.tabla{
+  width: 1300px;;
+}
+
+.tabla td,
+.tabla th{
+  padding: 7px;
+  border: 1px solid rgb(184, 180, 180);
+  text-align: left;
+}
+
+.tabla th{
+  background-color: rgb(180, 240, 180);
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.tabla tr:hover{
+  background-color: rgb(193, 218, 209);
+  cursor: pointer;
+}
+
+
+
+
