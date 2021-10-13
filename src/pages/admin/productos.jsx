@@ -74,15 +74,12 @@ const Productos = () => {
             </BarraTitulo>
             <div className='flex flex-col w-full items-center'>
                 <button onClick={()=>{setMostrarTabla(!mostrarTabla)}} className='bg-indigo-400 text-white rounded-full font-extrabold w-52 p-2 m-3'>{textoBoton}</button>
-                {mostrarTabla ? <TablaProductos listaProductos = {productos}/>:<FormularioCreacionProductos/>}
+                {mostrarTabla ? <TablaProductos listaProductos = {productos}/>:<FormularioCreacionProductos mostrarTabla={setMostrarTabla}/>}
                 <ToastContainer
                     position="bottom-center"
                     autoClose={5000}
                 />
-                    
-                 
-            </div>   
-                     
+            </div>           
         </div> 
     )
 }
@@ -116,7 +113,7 @@ const TablaProductos = ({listaProductos}) =>{
     )
 }
 
-const FormularioCreacionProductos = () =>{
+const FormularioCreacionProductos = ({mostrarTabla}) =>{
     const [idProductos, setIDproductos] = useState();
     const [categoria, setCategoria] = useState();
     const [descripcion, setDescripcion] = useState();
@@ -124,6 +121,7 @@ const FormularioCreacionProductos = () =>{
 
     const enviarDatosAlBackend = ()=>{
         toast.success("Producto registrado correctamente")
+        mostrarTabla(true);
     }
 
     return(
