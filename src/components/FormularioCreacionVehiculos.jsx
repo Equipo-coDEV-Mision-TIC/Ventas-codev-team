@@ -3,7 +3,7 @@ import BarraTitulo from './barraTitulo'
 
 const FormularioCreacionVehiculos = () => {
     return (
-        <div className='flex flex-col items-center justify-center h-full w-full my-20'>
+        <div className='flex flex-col items-center justify-center h-full w-full'>
             <BarraTitulo>
                 Registro nuevo producto
             </BarraTitulo>
