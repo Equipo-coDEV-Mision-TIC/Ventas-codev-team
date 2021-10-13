@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import LayoutAdmin from '../../layouts/LayoutAdmin'
 import BarraTitulo from '../../components/barraTitulo'
 import FormProductos from '../../components/FormularioCreacionVehiculos'
 
@@ -23,6 +22,18 @@ const productosBackend = [
         Categoria: "DATO3",
         ValorUnitario: "DATO4"
     },
+    {
+        IDproducto: "DATO1",
+        Descripción: "DATO2",
+        Categoria: "DATO3",
+        ValorUnitario: "DATO4"
+    },
+    {
+        IDproducto: "DATO1",
+        Descripción: "DATO2",
+        Categoria: "DATO3",
+        ValorUnitario: "DATO4"
+    }
 ]
 
 const Productos = () => {
@@ -46,7 +57,7 @@ const Productos = () => {
         }
     },[mostrarTabla]);
     return (
-        <LayoutAdmin>
+        <div>
             <BarraTitulo>
                     Informacion productos
                 </BarraTitulo>
@@ -55,7 +66,7 @@ const Productos = () => {
                 {mostrarTabla ? <TablaProductos listaProductos = {productos}/>:<FormularioCreacionProductos/>}
                 
                 
-        </LayoutAdmin> 
+        </div> 
     )
 }
 
@@ -70,6 +81,19 @@ const TablaProductos = ({listaProductos}) =>{
                     <th>VALOR UNITARIO</th>
                 </tr>
             </thead>
+            <tbody>
+                {listaProductos.map((productos)=>{
+                    return(
+                        <tr>
+                            <th>{productos.IDproducto}</th>
+                            <th>{productos.Descripción}</th>
+                            <th>{productos.Categoria}</th>
+                            <th>{productos.ValorUnitario}</th>
+                        </tr>
+                    )
+                })}
+                
+            </tbody>
         </table>
     )
 }
