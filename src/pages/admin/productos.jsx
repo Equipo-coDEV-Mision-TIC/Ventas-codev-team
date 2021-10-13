@@ -88,8 +88,8 @@ const TablaProductos = ({listaProductos}) =>{
             <thead className='bg-blue-200'>
                 <tr>
                     <th>ID PRODUCTOS</th>
-                    <th>DESCRIPCION</th>
                     <th>CATEGORIA</th>
+                    <th>DESCRIPCION</th>
                     <th>VALOR UNITARIO</th>
                 </tr>
             </thead>
@@ -98,8 +98,8 @@ const TablaProductos = ({listaProductos}) =>{
                     return(
                         <tr>
                             <th>{productos.IDproducto}</th>
-                            <th>{productos.Descripción}</th>
                             <th>{productos.Categoria}</th>
+                            <th>{productos.Descripción}</th>
                             <th>{productos.ValorUnitario}</th>
                         </tr>
                     )
