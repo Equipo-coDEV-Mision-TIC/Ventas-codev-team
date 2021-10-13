@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 button{
   z-index: 200;
 }
@@ -120,7 +121,7 @@ cursor: pointer;
 }
 
 .tabla{
-  width: 1300px;;
+  width: 98%;
 }
 
 .tabla td,
@@ -131,13 +132,13 @@ cursor: pointer;
 }
 
 .tabla th{
-  background-color: rgb(180, 240, 180);
+  
   padding-top: 12px;
   padding-bottom: 12px;
 }
 
 .tabla tr:hover{
-  background-color: rgb(193, 218, 209);
+  background-color: rgb(231, 239, 248);
   cursor: pointer;
 }
 
