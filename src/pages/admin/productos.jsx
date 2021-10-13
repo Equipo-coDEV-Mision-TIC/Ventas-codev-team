@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import BarraTitulo from '../../components/barraTitulo'
-
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const productosBackend = [
     {
