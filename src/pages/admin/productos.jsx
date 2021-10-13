@@ -72,8 +72,9 @@ const Productos = () => {
 
 const TablaProductos = ({listaProductos}) =>{
     return(
+    <div className='flex flex-col items-center justify-center'>
         <table className='tabla'>
-            <thead>
+            <thead className='bg-blue-200'>
                 <tr>
                     <th>ID PRODUCTOS</th>
                     <th>DESCRIPCION</th>
@@ -81,7 +82,7 @@ const TablaProductos = ({listaProductos}) =>{
                     <th>VALOR UNITARIO</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className='bg-white'>
                 {listaProductos.map((productos)=>{
                     return(
                         <tr>
@@ -95,6 +96,9 @@ const TablaProductos = ({listaProductos}) =>{
                 
             </tbody>
         </table>
+
+    </div>
+        
     )
 }
 
