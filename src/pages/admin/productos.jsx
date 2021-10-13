@@ -74,7 +74,13 @@ const Productos = () => {
             </BarraTitulo>
             <div className='flex flex-col w-full items-center'>
                 <button onClick={()=>{setMostrarTabla(!mostrarTabla)}} className='bg-indigo-400 text-white rounded-full font-extrabold w-52 p-2 m-3'>{textoBoton}</button>
-                {mostrarTabla ? <TablaProductos listaProductos = {productos}/>:<FormularioCreacionProductos/>}     
+                {mostrarTabla ? <TablaProductos listaProductos = {productos}/>:<FormularioCreacionProductos/>}
+                <ToastContainer
+                    position="bottom-center"
+                    autoClose={5000}
+                />
+                    
+                 
             </div>   
                      
         </div> 
@@ -117,7 +123,7 @@ const FormularioCreacionProductos = () =>{
     const [valorUnitario, setValorUnitario] = useState();
 
     const enviarDatosAlBackend = ()=>{
-        
+        toast.success("Producto registrado correctamente")
     }
 
     return(
@@ -148,7 +154,7 @@ const FormularioCreacionProductos = () =>{
                     value={valorUnitario} onChange={(e)=>{setValorUnitario(e.target.value)}}/>
                 </label>
                 
-                <button className='bg-indigo-600 border border-gray-600 p-4 rounded-full m-2 text-white text-3xl font-extrabold hover:translate-x-52'
+                <button type='button' className='bg-indigo-600 border border-gray-600 p-4 rounded-full m-2 text-white text-3xl font-extrabold hover:translate-x-52'
                 onClick={()=>{enviarDatosAlBackend()}}>Guardar producto</button>
             </form>
         </div>
