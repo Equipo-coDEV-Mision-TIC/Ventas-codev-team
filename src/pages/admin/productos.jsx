@@ -27,35 +27,17 @@ const productosBackend = [
         Descripción: "DATO2",
         Categoria: "DATO3",
         ValorUnitario: "DATO4"
-    },
-    {
-        IDproducto: "DATO1",
-        Descripción: "DATO2",
-        Categoria: "DATO3",
-        ValorUnitario: "DATO4"
-    },
-    {
-        IDproducto: "DATO1",
-        Descripción: "DATO2",
-        Categoria: "DATO3",
-        ValorUnitario: "DATO4"
-    },
-    {
-        IDproducto: "DATO1",
-        Descripción: "DATO2",
-        Categoria: "DATO3",
-        ValorUnitario: "DATO4"
     }
 ]
 
 const Productos = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [textoBoton, setTextoBoton] = useState("Registrar nuevo producto");
-    const [productos, setproductos] = useState([]);
+    const [productos, setProductos] = useState([]);
     
 
     useEffect(()=>{
-        setproductos(productosBackend)
+        setProductos(productosBackend)
     },[]);
     
     
@@ -74,7 +56,7 @@ const Productos = () => {
             </BarraTitulo>
             <div className='flex flex-col w-full items-center'>
                 <button onClick={()=>{setMostrarTabla(!mostrarTabla)}} className='bg-indigo-400 text-white rounded-full font-extrabold w-52 p-2 m-3'>{textoBoton}</button>
-                {mostrarTabla ? <TablaProductos listaProductos = {productos}/>:<FormularioCreacionProductos mostrarTabla={setMostrarTabla}/>}
+                {mostrarTabla ? <TablaProductos listaProductos = {productos}/>:<FormularioCreacionProductos mostrarTabla={setMostrarTabla} listaProductos={productos} agregarProducto ={setProductos}/>}
                 <ToastContainer
                     position="bottom-center"
                     autoClose={5000}
@@ -113,7 +95,7 @@ const TablaProductos = ({listaProductos}) =>{
     )
 }
 
-const FormularioCreacionProductos = ({mostrarTabla}) =>{
+const FormularioCreacionProductos = ({mostrarTabla,listaProductos,agregarProducto}) =>{
     const [idProductos, setIDproductos] = useState();
     const [categoria, setCategoria] = useState();
     const [descripcion, setDescripcion] = useState();
@@ -122,6 +104,7 @@ const FormularioCreacionProductos = ({mostrarTabla}) =>{
     const enviarDatosAlBackend = ()=>{
         toast.success("Producto registrado correctamente")
         mostrarTabla(true);
+        agregarProducto([...listaProductos,{IDproducto:idProductos,Categoria:categoria,Descripción:descripcion,ValorUnitario:valorUnitario}])
     }
 
     return(
@@ -133,7 +116,7 @@ const FormularioCreacionProductos = ({mostrarTabla}) =>{
                 <label className='text-center font-extrabold'>Registre su producto aquí..</label>
                 <label className='flex flex-col' htmlFor=" ID Producto">
                     ID Producto
-                    <input name='ID Producto' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type='number' min={1001} max={9999} placeholder="0001" 
+                    <input name='ID Producto' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type='number' min={1001} max={9999} placeholder="1001" 
                     value={idProductos} onChange={(e)=>{setIDproductos(e.target.value)}}/>
                 </label>
                 <label className='flex flex-col' htmlFor="Categoria">
