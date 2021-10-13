@@ -52,13 +52,12 @@ const Productos = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [textoBoton, setTextoBoton] = useState("Registrar nuevo producto");
     const [productos, setproductos] = useState([]);
+    
 
     useEffect(()=>{
         setproductos(productosBackend)
     },[]);
     
-    
-
     
 
     useEffect(()=>{
@@ -112,6 +111,15 @@ const TablaProductos = ({listaProductos}) =>{
 }
 
 const FormularioCreacionProductos = () =>{
+    const [idProductos, setIDproductos] = useState();
+    const [categoria, setCategoria] = useState();
+    const [descripcion, setDescripcion] = useState();
+    const [valorUnitario, setValorUnitario] = useState();
+
+    const enviarDatosAlBackend = ()=>{
+        
+    }
+
     return(
         <div className='flex flex-col items-center justify-center h-full w-full'>
             <BarraTitulo>
@@ -121,22 +129,27 @@ const FormularioCreacionProductos = () =>{
                 <label className='text-center font-extrabold'>Registre su producto aquí..</label>
                 <label className='flex flex-col' htmlFor=" ID Producto">
                     ID Producto
-                    <input name='ID Producto' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type='number' min={1001} max={9999} placeholder="0001"/>
+                    <input name='ID Producto' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type='number' min={1001} max={9999} placeholder="0001" 
+                    value={idProductos} onChange={(e)=>{setIDproductos(e.target.value)}}/>
                 </label>
                 <label className='flex flex-col' htmlFor="Categoria">
                     Categoria
-                    <input name='Categoria' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" placeholder="Anillado 100 hojas"/>
+                    <input name='Categoria' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" placeholder="Anillado 100 hojas" 
+                    value={categoria} onChange={(e)=>{setCategoria(e.target.value)}}/>
                 </label>
                 <label className='flex flex-col' htmlFor="Descripción">
                     Descripción
-                    <input name='Descripción' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" placeholder="Cuaderno"/>
+                    <input name='Descripción' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" placeholder="Cuaderno"
+                    value={descripcion} onChange={(e)=>{setDescripcion(e.target.value)}}/>
                 </label>
                 <label className='flex flex-col' htmlFor="Valor Unitario">
                     Valor Unitario
-                    <input name='Valor Unitario Categoria' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="number" placeholder="5500" />
+                    <input name='Valor Unitario Categoria' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="number" placeholder="5500" 
+                    value={valorUnitario} onChange={(e)=>{setValorUnitario(e.target.value)}}/>
                 </label>
                 
-                <button className='bg-indigo-600 border border-gray-600 p-4 rounded-full m-2 text-white text-3xl font-extrabold hover:translate-x-52'>Guardar producto</button>
+                <button className='bg-indigo-600 border border-gray-600 p-4 rounded-full m-2 text-white text-3xl font-extrabold hover:translate-x-52'
+                onClick={()=>{enviarDatosAlBackend()}}>Guardar producto</button>
             </form>
         </div>
     )
