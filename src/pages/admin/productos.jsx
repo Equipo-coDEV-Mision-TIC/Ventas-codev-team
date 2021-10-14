@@ -8,19 +8,7 @@ const productosBackend = [
         IDproducto: "DATO1",
         Descripción: "DATO2",
         Categoria: "DATO3",
-        ValorUnitario: "DATO4"
-    },
-    {
-        IDproducto: "DATO1",
-        Descripción: "DATO2",
-        Categoria: "DATO3",
-        ValorUnitario: "DATO4"
-    },
-    {
-        IDproducto: "DATO1",
-        Descripción: "DATO2",
-        Categoria: "DATO3",
-        ValorUnitario: "DATO4"
+        Precio: "DATO4"
     },
     {
         IDproducto: "DATO1",
@@ -74,7 +62,7 @@ const TablaProductos = ({listaProductos}) =>{
                     <th>ID PRODUCTOS</th>
                     <th>CATEGORIA</th>
                     <th>DESCRIPCION</th>
-                    <th>VALOR UNITARIO</th>
+                    <th>PRECIO</th>
                 </tr>
             </thead>
             <tbody className='bg-white'>
@@ -84,7 +72,7 @@ const TablaProductos = ({listaProductos}) =>{
                             <th>{productos.IDproducto}</th>
                             <th>{productos.Categoria}</th>
                             <th>{productos.Descripción}</th>
-                            <th>{productos.ValorUnitario}</th>
+                            <th>{productos.Precio}</th>
                         </tr>
                     )
                 })}
@@ -125,17 +113,23 @@ const FormularioCreacionProductos = ({setMostrarTabla,listaProductos,setAgregarP
                 </label>
                 <label className='flex flex-col' htmlFor="Categoria">
                     Categoria
-                    <input name='Categoria' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" placeholder="Anillado 100 hojas" 
-                    required/>
+                    <select name='Categoria' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" required defaultValue={0}>
+                        <option disabled value ={0}>Seleccione una categoria</option>
+                        <option>Comedores</option>
+                        <option>Escritorios</option>
+                        <option>Juegos de Sala</option>
+                        <option>Sillas de escritorio</option>
+                        <option>Sofás</option>
+                    </select>
                 </label>
                 <label className='flex flex-col' htmlFor="Descripción">
                     Descripción
-                    <input name='Descripción' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" placeholder="Cuaderno"
+                    <input name='Descripción' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" placeholder="Silla Gerente Ergonómica"
                      required/>
                 </label>
-                <label className='flex flex-col' htmlFor="ValorUnitario">
-                    Valor Unitario
-                    <input name='ValorUnitario' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="number" placeholder="5500" 
+                <label className='flex flex-col' htmlFor="Precio">
+                    Precio
+                    <input name='Precio' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="number" placeholder="1000000" 
                      required/>
                 </label>
                 
