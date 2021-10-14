@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import BarraTitulo from '../../components/barraTitulo'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -56,7 +56,7 @@ const Productos = () => {
             </BarraTitulo>
             <div className='flex flex-col w-full items-center'>
                 <button onClick={()=>{setMostrarTabla(!mostrarTabla)}} className='bg-indigo-400 text-white rounded-full font-extrabold w-52 p-2 m-3'>{textoBoton}</button>
-                {mostrarTabla ? <TablaProductos listaProductos = {productos}/>:<FormularioCreacionProductos mostrarTabla={setMostrarTabla} listaProductos={productos} agregarProducto ={setProductos}/>}
+                {mostrarTabla ? <TablaProductos listaProductos = {productos}/>:<FormularioCreacionProductos setMostrarTabla={setMostrarTabla} listaProductos={productos} setAgregarProducto ={setProductos}/>}
                 <ToastContainer
                     position="bottom-center"
                     autoClose={5000}
@@ -95,16 +95,20 @@ const TablaProductos = ({listaProductos}) =>{
     )
 }
 
-const FormularioCreacionProductos = ({mostrarTabla,listaProductos,agregarProducto}) =>{
-    const [idProductos, setIDproductos] = useState();
-    const [categoria, setCategoria] = useState();
-    const [descripcion, setDescripcion] = useState();
-    const [valorUnitario, setValorUnitario] = useState();
+const FormularioCreacionProductos = ({setMostrarTabla,listaProductos,setAgregarProducto}) =>{
+    const form = useRef(null);
+    const submitForm =(e)=>{
+        e.preventDefault();
+    
+        const fd = new FormData(form.current);
 
-    const enviarDatosAlBackend = ()=>{
-        toast.success("Producto registrado correctamente")
-        mostrarTabla(true);
-        agregarProducto([...listaProductos,{IDproducto:idProductos,Categoria:categoria,Descripción:descripcion,ValorUnitario:valorUnitario}])
+        const nuevoProducto ={};
+        fd.forEach((value,key) => {
+            nuevoProducto[key] =value;
+        });
+        setMostrarTabla(true);
+        toast.success("Producto registrado correctamente");
+        setAgregarProducto([...listaProductos,nuevoProducto])
     }
 
     return(
@@ -112,31 +116,30 @@ const FormularioCreacionProductos = ({mostrarTabla,listaProductos,agregarProduct
             <BarraTitulo>
                 Registro nuevo producto
             </BarraTitulo>
-            <form className='grid grid-rows-1 w-96 border border-gray-600 bg-blue-200 m-2'>
+            <form ref={form} onSubmit={submitForm} className='grid grid-rows-1 w-96 border border-gray-600 bg-blue-200 m-2'>
                 <label className='text-center font-extrabold'>Registre su producto aquí..</label>
-                <label className='flex flex-col' htmlFor=" ID Producto">
+                <label className='flex flex-col' htmlFor=" IDproducto">
                     ID Producto
-                    <input name='ID Producto' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type='number' min={1001} max={9999} placeholder="1001" 
-                    value={idProductos} onChange={(e)=>{setIDproductos(e.target.value)}}/>
+                    <input name='IDproducto' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type='number' min={1001} max={9999} placeholder="1001" 
+                     required/>
                 </label>
                 <label className='flex flex-col' htmlFor="Categoria">
                     Categoria
                     <input name='Categoria' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" placeholder="Anillado 100 hojas" 
-                    value={categoria} onChange={(e)=>{setCategoria(e.target.value)}}/>
+                    required/>
                 </label>
                 <label className='flex flex-col' htmlFor="Descripción">
                     Descripción
                     <input name='Descripción' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" placeholder="Cuaderno"
-                    value={descripcion} onChange={(e)=>{setDescripcion(e.target.value)}}/>
+                     required/>
                 </label>
-                <label className='flex flex-col' htmlFor="Valor Unitario">
+                <label className='flex flex-col' htmlFor="ValorUnitario">
                     Valor Unitario
-                    <input name='Valor Unitario Categoria' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="number" placeholder="5500" 
-                    value={valorUnitario} onChange={(e)=>{setValorUnitario(e.target.value)}}/>
+                    <input name='ValorUnitario' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="number" placeholder="5500" 
+                     required/>
                 </label>
                 
-                <button type='button' className='bg-indigo-600 border border-gray-600 p-4 rounded-full m-2 text-white text-3xl font-extrabold hover:translate-x-52'
-                onClick={()=>{enviarDatosAlBackend()}}>Guardar producto</button>
+                <button type='submit' className='bg-indigo-600 border border-gray-600 p-4 rounded-full m-2 text-white text-3xl font-extrabold hover:translate-x-52'>Guardar producto</button>
             </form>
         </div>
     )
