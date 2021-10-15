@@ -83,9 +83,9 @@ const TablaProductos = ({listaUsuarios}) =>{
                         <tr>
                             <th>{usuarios.IDUsuario}</th>
                             <th>{usuarios.NombreUsuario}</th>
-                            <th className>
+                            <th>
                                 <label className='w-full'>
-                                    <select defaultValue={0}>
+                                    <select defaultValue={0} className='w-full'>
                                         <option disabled value= {0}>Seleccione un rol</option>
                                         <option>Vendedor</option>
                                         <option>Administrador</option>
