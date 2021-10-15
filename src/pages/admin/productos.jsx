@@ -56,7 +56,7 @@ const Productos = () => {
 
 const TablaProductos = ({listaProductos}) =>{
     return(
-        <table className='tabla'>
+        <table className='tabla w-3/4'>
             <thead className='bg-blue-200'>
                 <tr>
                     <th>ID PRODUCTOS</th>
