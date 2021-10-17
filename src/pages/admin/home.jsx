@@ -1,10 +1,9 @@
 import React from 'react'
-import LayoutAdmin from '../../layouts/LayoutAdmin'
 import BarraTitulo from '../../components/barraTitulo'
 
 const home = () => {
     return (
-        <LayoutAdmin>
+        <div>
                 <BarraTitulo>
                     Home
                 </BarraTitulo>
@@ -12,7 +11,7 @@ const home = () => {
                 <div>
                     HOLA,ESTA ES LA PAGINA DE HOME
                 </div>
-        </LayoutAdmin>  
+        </div>  
     )
 }
 

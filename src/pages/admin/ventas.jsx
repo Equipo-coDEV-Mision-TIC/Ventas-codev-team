@@ -1,10 +1,9 @@
 import React from 'react'
-import LayoutAdmin from '../../layouts/LayoutAdmin'
 import BarraTitulo from '../../components/barraTitulo'
 
 const ventas = () => {
     return (
-        <LayoutAdmin>
+        <div>
             <BarraTitulo>
                 VENTAS
             </BarraTitulo>
@@ -12,7 +11,7 @@ const ventas = () => {
             <div>
                 HOLA,ESTA ES LA PAGINA DE VENTAS
             </div>
-        </LayoutAdmin> 
+        </div> 
     )
 }
 

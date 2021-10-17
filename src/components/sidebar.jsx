@@ -37,12 +37,6 @@ const sidebar = () => {
                             <button className = "buttonList">Usuarios</button>
                         </li>
                     </Link>
-
-                    <Link to = '/Home/Vendedores'>
-                        <li>
-                            <button className = "buttonList">Vendedores</button>
-                        </li>
-                    </Link>
                 </ul>
 
                 <ul className = "styleUl2">
