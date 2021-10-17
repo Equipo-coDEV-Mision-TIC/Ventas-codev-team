@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const LayoutLogin = ({children}) => {
     return (
@@ -7,7 +7,7 @@ const LayoutLogin = ({children}) => {
                 {children}
             </main>
         </div>
-    )
-}
+    );
+};
 
-export default LayoutLogin
+export default LayoutLogin;

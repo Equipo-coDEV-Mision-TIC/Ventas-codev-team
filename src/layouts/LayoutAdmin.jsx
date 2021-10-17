@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Sidebar from '../components/sidebar'
 //import Cuadrotransparente from '../components/cuadrotransparente'
 
@@ -10,8 +10,8 @@ const LayoutAdmin = ({children}) => {
                 {children}
             </main>
         </div>
-    )
-}
+    );
+};
 
-export default LayoutAdmin
+export default LayoutAdmin;
 
