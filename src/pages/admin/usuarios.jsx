@@ -7,21 +7,21 @@ const usuariosBackend = [
     {
         IDUsuario: "1049616123",
         NombreUsuario: "Yeison Alberto Buitrago Suescun",
-        Rol: "Administrdor",
+        Rol: "",
         Estado: "Activo",
          
     },
     {
-        IDUsuario: "DATO1",
-        NombreUsuario: "DATO2",
-        Rol: "Administrdor",
+        IDUsuario: "7234767",
+        NombreUsuario: "Pepito Perez",
+        Rol: "",
         Estado: "Inactivo",
         
     },
     {
-        IDUsuario: "DATO1",
-        NombreUsuario: "DATO2",
-        Rol: "DATO3",
+        IDUsuario: "74897694",
+        NombreUsuario: "Maria Martinez",
+        Rol: "",
         Estado: "Activo",
         Acciones: <div className='flex w-full justify-around'>
                     <i class="fas fa-pencil-alt " >
@@ -29,8 +29,8 @@ const usuariosBackend = [
                   </div> 
     },
     {
-        IDUsuario: "DATO1",
-        NombreUsuario: "DATO2",
+        IDUsuario: "59786422",
+        NombreUsuario: "Pepita Gonzalez",
         Rol: "DATO3",
         Estado: "Activo",
         Acciones: <div className='flex w-full justify-around'>
