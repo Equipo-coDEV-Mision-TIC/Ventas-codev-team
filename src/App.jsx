@@ -2,7 +2,6 @@ import './App.css';
 import LayoutAdmin from './layouts/LayoutAdmin'
 import LayoutLogin from './layouts/LayoutLogin'
 import PaginaLogin from './pages/paginaLogin'
-import Vendedores from './pages/admin/vendedores';
 import Ventas from './pages/admin/ventas';
 import Productos from './pages/admin/productos';
 import Usuarios from './pages/admin/usuarios';
@@ -19,12 +18,9 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <Route path ={['/Home','/Home/Vendedores','/Home/productos','/Home/ventas','/Home/usuarios']}>
+          <Route path ={['/Home','/Home/productos','/Home/ventas','/Home/usuarios']}>
             <LayoutAdmin>
               <Switch>
-                <Route path = '/Home/Vendedores'>
-                  <Vendedores/>
-                </Route>
                 <Route path = '/Home/productos'>
                   <Productos/>
                 </Route>

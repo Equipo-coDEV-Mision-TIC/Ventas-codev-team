@@ -9,14 +9,7 @@ const productosBackend = [
         Descripción: "DATO2",
         Categoria: "DATO3",
         Precio: "DATO4"
-    },
-    {
-        IDproducto: "DATO1",
-        Descripción: "DATO2",
-        Categoria: "DATO3",
-        ValorUnitario: "DATO4"
-    }
-]
+    }]
 
 const Productos = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
@@ -56,7 +49,7 @@ const Productos = () => {
 
 const TablaProductos = ({listaProductos}) =>{
     return(
-        <table className='tabla'>
+        <table className='tabla w-3/4'>
             <thead className='bg-blue-200'>
                 <tr>
                     <th>ID PRODUCTOS</th>
