@@ -8,7 +8,12 @@ const productosBackend = [
         IDproducto: "DATO1",
         Descripción: "DATO2",
         Categoria: "DATO3",
-        Precio: "DATO4"
+        Precio: "DATO4",
+        Acciones: 
+                 <div className='flex w-full justify-around'>
+                    <i class="fas fa-pencil-alt " >
+                    </i> <i class="far fa-trash-alt"></i> 
+                  </div>
     }]
 
 const Productos = () => {
@@ -52,10 +57,11 @@ const TablaProductos = ({listaProductos}) =>{
         <table className='tabla w-3/4'>
             <thead className='bg-blue-200'>
                 <tr>
-                    <th>ID PRODUCTOS</th>
-                    <th>CATEGORIA</th>
+                    <th className='w-64'>ID PRODUCTOS</th>
+                    <th className='w-40'>CATEGORIA</th>
                     <th>DESCRIPCION</th>
                     <th>PRECIO</th>
+                    <th className='w-32'>ACCIONES</th>
                 </tr>
             </thead>
             <tbody className='bg-white'>
@@ -66,6 +72,11 @@ const TablaProductos = ({listaProductos}) =>{
                             <th>{productos.Categoria}</th>
                             <th>{productos.Descripción}</th>
                             <th>{productos.Precio}</th>
+                            <th><div className='flex w-full justify-around'>
+                                    <i class="fas fa-pencil-alt " >
+                                    </i> <i class="far fa-trash-alt"></i> 
+                                </div>
+                            </th>
                         </tr>
                     )
                 })}
