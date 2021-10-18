@@ -68,7 +68,7 @@ const Ventas = () => {
             </BarraTitulo>
             <div className='flex flex-col w-full items-center'>
                 <button onClick={()=>{setMostrarTabla(!mostrarTabla)}} className='bg-indigo-400 text-white rounded-full font-extrabold w-52 p-2 m-3'>{textoBoton}</button>
-                {mostrarTabla ? <TablaVentas listaVentas = {ventas}/>:<FormularioCreacionVentas setMostrarTabla={setMostrarTabla} listaVentas={ventas} setAgregarVenta ={setVentas}/>}
+                {mostrarTabla ? <TablaVentas listaVentas = {Ventas}/>:<FormularioCreacionVentas setMostrarTabla={setMostrarTabla} listaVentas={Ventas} setAgregarVenta ={setVentas}/>}
                 <ToastContainer
                     position="bottom-center"
                     autoClose={5000}
