@@ -24,7 +24,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-const ventasBackend = [
+const VentasBackend = [
     {
         IDventa: "2524",
         Cliente: "cHRISTIAN PEREZ",
@@ -42,14 +42,14 @@ const ventasBackend = [
     }
 ]
 
-const ventas = () => {
+const Ventas = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [textoBoton, setTextoBoton] = useState("Registrar nueva venta");
-    const [ventas, setVentas] = useState([]);
+    const [Ventas, setVentas] = useState([]);
     
 
     useEffect(()=>{
-        setVentas(ventasBackend)
+        setVentas(VentasBackend)
     },[]);
     
     
@@ -164,4 +164,4 @@ const FormularioCreacionVentas = ({setMostrarTabla,listaVentas,setAgregarVenta})
     )
 }
 
-export default ventas
+export default Ventas
