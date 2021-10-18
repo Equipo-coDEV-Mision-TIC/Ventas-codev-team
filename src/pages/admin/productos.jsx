@@ -2,6 +2,7 @@ import React, {useEffect, useState, useRef} from 'react'
 import BarraTitulo from '../../components/barraTitulo'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {nanoid} from 'nanoid';
 
 const productosBackend = [
     {
@@ -15,6 +16,8 @@ const productosBackend = [
                     </i> <i class="far fa-trash-alt"></i> 
                   </div>
     }]
+
+
 
 const Productos = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
@@ -36,11 +39,11 @@ const Productos = () => {
         }
     },[mostrarTabla]);
     return (
-        <div className='flex w-full'>
+        <div className='flex w-screen'>
             <BarraTitulo>
                     Informacion productos
             </BarraTitulo>
-            <div className='flex flex-col w-full items-center'>
+            <div className='flex flex-col w-full items-center justify-center'>
                 <button onClick={()=>{setMostrarTabla(!mostrarTabla)}} className='bg-indigo-400 text-white rounded-full font-extrabold w-52 p-2 m-3'>{textoBoton}</button>
                 {mostrarTabla ? <TablaProductos listaProductos = {productos}/>:<FormularioCreacionProductos setMostrarTabla={setMostrarTabla} listaProductos={productos} setAgregarProducto ={setProductos}/>}
                 <ToastContainer
@@ -52,38 +55,86 @@ const Productos = () => {
     )
 }
 
-const TablaProductos = ({listaProductos}) =>{
-    return(
-        <table className='tabla w-3/4'>
-            <thead className='bg-blue-200'>
-                <tr>
-                    <th className='w-64'>ID PRODUCTOS</th>
-                    <th className='w-40'>CATEGORIA</th>
-                    <th>DESCRIPCION</th>
-                    <th>PRECIO</th>
-                    <th className='w-32'>ACCIONES</th>
-                </tr>
-            </thead>
-            <tbody className='bg-white'>
-                {listaProductos.map((productos)=>{
-                    return(
-                        <tr>
-                            <th>{productos.IDproducto}</th>
-                            <th>{productos.Categoria}</th>
-                            <th>{productos.Descripción}</th>
-                            <th>{productos.Precio}</th>
-                            <th><div className='flex w-full justify-around'>
-                                    <i class="fas fa-pencil-alt " >
-                                    </i> <i class="far fa-trash-alt"></i> 
-                                </div>
-                            </th>
-                        </tr>
-                    )
-                })}
-                
-            </tbody>
-        </table>
+const TablaProductos = ({listaProductos,setMostrarTabla,setAgregarProducto}) =>{
+    const form = useRef(null);
+    const submitEdit =(e)=>{
+        e.preventDefault();
+    
+        const fd = new FormData(form.current);
         
+
+        const nuevoProducto ={};
+        fd.forEach((value,key) => {
+            nuevoProducto[key] =value;
+        });
+        setMostrarTabla(true);
+        toast.success("Producto Actualizado correctamente");
+        setAgregarProducto([...listaProductos,nuevoProducto])
+    }
+
+    return(
+        <form ref={form} onSubmit={submitEdit} className='flex items-center justify-center w-full'>
+            <table className='tabla w-3/4'>
+                <thead className='bg-blue-200'>
+                    <tr>
+                        <th className='w-64'>ID PRODUCTOS</th>
+                        <th className='w-40'>CATEGORIA</th>
+                        <th>DESCRIPCION</th>
+                        <th>PRECIO</th>
+                        <th className='w-32'>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody className='bg-white'>
+                    {listaProductos.map((productos)=>{
+                        return <FilaProductos key={nanoid()} productos = {productos}/>
+                    })}
+                    
+                </tbody>
+            </table>
+        </form>
+        
+        
+    )
+}
+const FilaProductos =({productos})=>{
+    const [edit,setEdit] = useState(false)
+    return(
+    
+        <tr>
+            {edit ?(
+            <>
+                <td>{productos.IDproducto}</td>
+                <td><input name='Categoria' type="text" defaultValue ={productos.Categoria} className='bg-white border border-gray-600 p-2 rounded-lg m-2'/></td>
+                <td><input name='Descripción' type="text" defaultValue ={productos.Descripción} className='bg-white border border-gray-600 p-2 rounded-lg m-2'/></td>
+                <td><input name='Precio' type="text" defaultValue ={productos.Precio} className='bg-white border border-gray-600 p-2 rounded-lg m-2'/></td>
+                <td>
+                    <div className='flex w-full justify-around'>
+                        <button type='submit'>
+                            <i onClick={()=>setEdit(!edit)} className="fas fa-check text-green-500  hover:text-green-600"/> 
+                        </button>
+                        <i className="far fa-trash-alt text-gray-500 hover:text-red-500"></i> 
+                    </div>
+                </td>
+            </>                    
+           ):(
+            <>
+                <td>{productos.IDproducto}</td>
+                <td>
+                    {productos.Categoria}
+                </td>
+                <td>{productos.Descripción}</td>
+                <td>{productos.Precio}</td>
+                <td>
+                    <div className='flex w-full justify-around'>
+                        <i onClick={()=>setEdit(!edit)} className="fas fa-pencil-alt text-gray-500 hover:text-yellow-500"/> 
+                        <i className="far fa-trash-alt text-gray-500 hover:text-red-500"></i> 
+                    </div>
+                </td>
+            </>
+           )}
+        
+        </tr>
+     
     )
 }
 
