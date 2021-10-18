@@ -17,27 +17,28 @@
 //export default ventas
 
 import React, {useEffect, useState, useRef} from 'react'
+import { ToastContainer, toast } from 'react-toastify';
 import BarraTitulo from '../../components/barraTitulo'
-import 'styles/ventas.css';
+//import 'styles/ventas.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 
 const ventasBackend = [
     {
-        IDventa: "DATO1",
-        Cliente: "DATO2",
-        ClienteId: "DATO3",
-        Precio: "DATO4",
-        Fecha: "DATO05"
+        IDventa: "2524",
+        Cliente: "cHRISTIAN PEREZ",
+        ClienteId: "1090452106",
+        Precio: "2500",
+        Fecha: "04/06/1992"
         
     },
     {
-        IDVenta: "DATO1",
-        Cliente: "DATO2",
-        ClienteId: "DATO3",
-        Precio: "DATO4",
-        Fecha: "DATO5"
+        IDVenta: "2625",
+        Cliente: "ANDRES ARCINIEGAS",
+        ClienteId: "1090452106",
+        Precio: "5000",
+        Fecha: "20/10/2021"
     }
 ]
 
@@ -77,7 +78,7 @@ const ventas = () => {
     )
 }
 
-const TablaVentas = ({listaVentass}) =>{
+const TablaVentas = ({listaVentas}) =>{
     return(
         <table className='tabla w-3/4'>
             <thead className='bg-blue-200'>
@@ -121,7 +122,7 @@ const FormularioCreacionVentas = ({setMostrarTabla,listaVentas,setAgregarVenta})
         });
         setMostrarTabla(true);
         toast.success("Venta registrada correctamente");
-        setAgregarVenta([...listaVentass,nuevaVenta])
+        setAgregarVenta([...listaVentas,nuevaVenta])
     }
 
     return(
@@ -131,7 +132,7 @@ const FormularioCreacionVentas = ({setMostrarTabla,listaVentas,setAgregarVenta})
             </BarraTitulo>
             <form ref={form} onSubmit={submitForm} className='grid grid-rows-1 w-96 border border-gray-600 bg-blue-200 m-2'>
                 <label className='text-center font-extrabold'>Registre su venta aquí..</label>
-                <label className='flex flex-col' htmlFor=" IDproducto">
+                <label className='flex flex-col' htmlFor=" IDventa">
                     ID Venta
                     <input name='IDventa' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type='number' min={1001} max={9999} placeholder="1001" 
                      required/>
@@ -140,23 +141,15 @@ const FormularioCreacionVentas = ({setMostrarTabla,listaVentas,setAgregarVenta})
                     Cliente
                     <input name='Cliente' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type='text'  placeholder="Antonio Garzon" 
                     required/>
-//                   <select name='Cliente' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" required defaultValue={0}>
-//                        <option disabled value ={0}>Seleccione una categoria</option>
-//                        <option>Comedores</option>
-//                       <option>Escritorios</option>
-//                      <option>Juegos de Sala</option> 
-//                        <option>Sillas de escritorio</option>
-//                       <option>Sofás</option>
-//                   </select>
                 </label>
                 <label className='flex flex-col' htmlFor="ClienteId">
                     Cliente Id
-                    <input name='ClienteId' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="number" placeholder="2001"
+                    <input name='ClienteId' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" placeholder="1090488521"
                      required/>
                 </label>
                 <label className='flex flex-col' htmlFor="Precio">
                     Precio
-                    <input name='Precio' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="number" placeholder="1000000" 
+                    <input name='Precio' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="number" placeholder="25000" 
                      required/>
                 </label>
                 <label className='flex flex-col' htmlFor="Fecha">
@@ -165,10 +158,10 @@ const FormularioCreacionVentas = ({setMostrarTabla,listaVentas,setAgregarVenta})
                      required/>
                 </label>
                 
-                <button type='submit' className='bg-indigo-600 border border-gray-600 p-4 rounded-full m-2 text-white text-3xl font-extrabold hover:translate-x-52'>Guardar producto</button>
+                <button type='submit' className='bg-indigo-600 border border-gray-600 p-4 rounded-full m-2 text-white text-3xl font-extrabold hover:translate-x-52'>Crear Venta</button>
             </form>
         </div>
     )
 }
 
-export default Ventas
+export default ventas
