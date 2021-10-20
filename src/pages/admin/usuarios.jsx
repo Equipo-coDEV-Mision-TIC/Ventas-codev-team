@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import BarraTitulo from '../../components/barraTitulo'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const usuariosBackend = [
@@ -43,7 +43,7 @@ const usuariosBackend = [
 
 const Usuarios = () => {
     const [usuarios, setUsuarios] = useState([]);
-    const [estado, setEstado] = useState("");
+    //const [estado, setEstado] = useState("");
     
 
     useEffect(()=>{

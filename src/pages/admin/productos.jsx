@@ -1,20 +1,34 @@
 import React, {useEffect, useState, useRef} from 'react'
 import BarraTitulo from '../../components/barraTitulo'
 import { ToastContainer, toast } from 'react-toastify';
+//import { Tooltip } from '@material-ui/core';
 import 'react-toastify/dist/ReactToastify.css';
 import {nanoid} from 'nanoid';
 
+
 const productosBackend = [
     {
-        IDproducto: "DATO1",
-        Descripción: "DATO2",
-        Categoria: "DATO3",
-        Precio: "DATO4",
+        IDproducto: "1001",
+        Categoria: "Sofás",
+        Descripción: "sofa reclinable cuerina",
+        Precio: "1100000",
         Acciones: 
                  <div className='flex w-full justify-around'>
                     <i class="fas fa-pencil-alt " >
                     </i> <i class="far fa-trash-alt"></i> 
                   </div>
+    },
+    {
+        IDproducto: "1002",
+        Categoria: "Sillas Oficina",
+        Descripción: "Silla Gerente Reclinable",
+        Precio: "950000",
+        Acciones: 
+                 <div className='flex w-full justify-around'>
+                    <i class="fas fa-pencil-alt " >
+                    </i> <i class="far fa-trash-alt"></i> 
+                  </div>
+                            
     }]
 
 
@@ -45,6 +59,7 @@ const Productos = () => {
             </BarraTitulo>
             <div className='flex flex-col w-full items-center justify-center'>
                 <button onClick={()=>{setMostrarTabla(!mostrarTabla)}} className='bg-indigo-400 text-white rounded-full font-extrabold w-52 p-2 m-3'>{textoBoton}</button>
+                
                 {mostrarTabla ? <TablaProductos listaProductos = {productos}/>:<FormularioCreacionProductos setMostrarTabla={setMostrarTabla} listaProductos={productos} setAgregarProducto ={setProductos}/>}
                 <ToastContainer
                     position="bottom-center"
@@ -56,6 +71,18 @@ const Productos = () => {
 }
 
 const TablaProductos = ({listaProductos,setMostrarTabla,setAgregarProducto}) =>{
+    const[busqueda,setBusqueda]=useState('')
+    const[productosFiltrados,setProductosFiltrados]=useState(listaProductos)
+
+    useEffect(() => {
+        setProductosFiltrados(
+            listaProductos.filter((elemento)=>{
+                return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase())
+            })
+        )
+        
+    },[busqueda,listaProductos])
+
     const form = useRef(null);
     const submitEdit =(e)=>{
         e.preventDefault();
@@ -73,19 +100,24 @@ const TablaProductos = ({listaProductos,setMostrarTabla,setAgregarProducto}) =>{
     }
 
     return(
-        <form ref={form} onSubmit={submitEdit} className='flex items-center justify-center w-full'>
-            <table className='tabla w-3/4'>
+        <form ref={form} onSubmit={submitEdit} className='flex flex-col items-center justify-center w-full'>
+            <input placeholder='Buscar' className='flex border border-gray-700 px-3 py-1 my-2 mx-3  rounded-md self-start hover:border-blue-700'
+                    value={busqueda}
+                    onChange={e=>setBusqueda(e.target.value)}
+                
+                />
+            <table className='tabla w-full'>
                 <thead className='bg-blue-200'>
                     <tr>
                         <th className='w-64'>ID PRODUCTOS</th>
-                        <th className='w-40'>CATEGORIA</th>
+                        <th className='w-64'>CATEGORIA</th>
                         <th>DESCRIPCION</th>
                         <th>PRECIO</th>
                         <th className='w-32'>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody className='bg-white'>
-                    {listaProductos.map((productos)=>{
+                    {productosFiltrados.map((productos)=>{
                         return <FilaProductos key={nanoid()} productos = {productos}/>
                     })}
                     
@@ -96,6 +128,7 @@ const TablaProductos = ({listaProductos,setMostrarTabla,setAgregarProducto}) =>{
         
     )
 }
+
 const FilaProductos =({productos})=>{
     const [edit,setEdit] = useState(false)
     return(
