@@ -4,45 +4,13 @@ import { ToastContainer, toast } from 'react-toastify';
 //import { Tooltip } from '@material-ui/core';
 import 'react-toastify/dist/ReactToastify.css';
 import {nanoid} from 'nanoid';
-
-
-const productosBackend = [
-    {
-        IDproducto: "1001",
-        Categoria: "Sofás",
-        Descripción: "sofa reclinable cuerina",
-        Precio: "1100000",
-        Acciones: 
-                 <div className='flex w-full justify-around'>
-                    <i class="fas fa-pencil-alt " >
-                    </i> <i class="far fa-trash-alt"></i> 
-                  </div>
-    },
-    {
-        IDproducto: "1002",
-        Categoria: "Sillas Oficina",
-        Descripción: "Silla Gerente Reclinable",
-        Precio: "950000",
-        Acciones: 
-                 <div className='flex w-full justify-around'>
-                    <i class="fas fa-pencil-alt " >
-                    </i> <i class="far fa-trash-alt"></i> 
-                  </div>
-                            
-    }]
-
+import axios from "axios";
 
 
 const Productos = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [textoBoton, setTextoBoton] = useState("Registrar nuevo producto");
     const [productos, setProductos] = useState([]);
-    
-
-    useEffect(()=>{
-        setProductos(productosBackend)
-    },[]);
-    
     
 
     useEffect(()=>{
@@ -173,7 +141,7 @@ const FilaProductos =({productos})=>{
 
 const FormularioCreacionProductos = ({setMostrarTabla,listaProductos,setAgregarProducto}) =>{
     const form = useRef(null);
-    const submitForm =(e)=>{
+    const submitForm = async (e)=>{
         e.preventDefault();
     
         const fd = new FormData(form.current);
@@ -182,9 +150,30 @@ const FormularioCreacionProductos = ({setMostrarTabla,listaProductos,setAgregarP
         fd.forEach((value,key) => {
             nuevoProducto[key] =value;
         });
+
+        const options = {
+            method: 'POST',
+            url: 'http://localhost:5000/Productos/nuevo',
+            headers: {'Content-Type': 'application/json'},
+            data: {
+              IDProducto: nuevoProducto.IDproducto,
+              Categoria: nuevoProducto.Categoria,
+              Descripcion: nuevoProducto.Descripcion,
+              Precio: nuevoProducto.Precio
+            }
+          };
+
+        await axios
+        .request(options).then(function (response) {
+            console.log(response.data);
+            toast.success("Producto registrado correctamente");
+          }).catch(function (error) {
+            console.error(error);
+            toast.error("No se pudo agregar el producto");
+        });
         setMostrarTabla(true);
-        toast.success("Producto registrado correctamente");
-        setAgregarProducto([...listaProductos,nuevoProducto])
+        
+        
     }
 
     return(
@@ -210,9 +199,9 @@ const FormularioCreacionProductos = ({setMostrarTabla,listaProductos,setAgregarP
                         <option>Sofás</option>
                     </select>
                 </label>
-                <label className='flex flex-col' htmlFor="Descripción">
+                <label className='flex flex-col' htmlFor="Descripcion">
                     Descripción
-                    <input name='Descripción' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" placeholder="Silla Gerente Ergonómica"
+                    <input name='Descripcion' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" placeholder="Silla Gerente Ergonómica"
                      required/>
                 </label>
                 <label className='flex flex-col' htmlFor="Precio">
