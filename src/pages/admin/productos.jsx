@@ -11,6 +11,16 @@ const Productos = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [textoBoton, setTextoBoton] = useState("Registrar nuevo producto");
     const [productos, setProductos] = useState([]);
+
+    useEffect(() => {
+        const options = {method: 'GET', url: 'http://localhost:5000/productos'};
+
+            axios.request(options).then(function (response) {
+                setProductos(response.data);
+            }).catch(function (error) {
+                console.error(error);
+             });
+    }, [])
     
 
     useEffect(()=>{
