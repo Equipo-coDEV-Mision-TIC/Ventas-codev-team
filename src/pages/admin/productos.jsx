@@ -13,14 +13,23 @@ const Productos = () => {
     const [productos, setProductos] = useState([]);
 
     useEffect(() => {
-        const options = {method: 'GET', url: 'http://localhost:5000/productos'};
 
-            axios.request(options).then(function (response) {
+        const obtenerProductos= async()=>{
+            const options = {method: 'GET', url: 'http://localhost:5000/productos'};
+
+            await axios
+            .request(options)
+            .then(function (response) {
                 setProductos(response.data);
+                console.log(response.data)
             }).catch(function (error) {
                 console.error(error);
              });
-    }, [])
+        }
+        if (mostrarTabla){
+            obtenerProductos()
+        }
+    }, [mostrarTabla])
     
 
     useEffect(()=>{
@@ -66,7 +75,6 @@ const TablaProductos = ({listaProductos,setMostrarTabla,setAgregarProducto}) =>{
         e.preventDefault();
     
         const fd = new FormData(form.current);
-        
 
         const nuevoProducto ={};
         fd.forEach((value,key) => {
@@ -116,7 +124,7 @@ const FilaProductos =({productos})=>{
             <>
                 <td>{productos.IDproducto}</td>
                 <td><input name='Categoria' type="text" defaultValue ={productos.Categoria} className='bg-white border border-gray-600 p-2 rounded-lg m-2'/></td>
-                <td><input name='Descripción' type="text" defaultValue ={productos.Descripción} className='bg-white border border-gray-600 p-2 rounded-lg m-2'/></td>
+                <td><input name='Descripcion' type="text" defaultValue ={productos.Descripcion} className='bg-white border border-gray-600 p-2 rounded-lg m-2'/></td>
                 <td><input name='Precio' type="text" defaultValue ={productos.Precio} className='bg-white border border-gray-600 p-2 rounded-lg m-2'/></td>
                 <td>
                     <div className='flex w-full justify-around'>
@@ -133,7 +141,7 @@ const FilaProductos =({productos})=>{
                 <td>
                     {productos.Categoria}
                 </td>
-                <td>{productos.Descripción}</td>
+                <td>{productos.Descripcion}</td>
                 <td>{productos.Precio}</td>
                 <td>
                     <div className='flex w-full justify-around'>
@@ -166,7 +174,7 @@ const FormularioCreacionProductos = ({setMostrarTabla,listaProductos,setAgregarP
             url: 'http://localhost:5000/Productos/nuevo',
             headers: {'Content-Type': 'application/json'},
             data: {
-              IDProducto: nuevoProducto.IDproducto,
+              IDproducto: nuevoProducto.IDproducto,
               Categoria: nuevoProducto.Categoria,
               Descripcion: nuevoProducto.Descripcion,
               Precio: nuevoProducto.Precio
@@ -194,7 +202,7 @@ const FormularioCreacionProductos = ({setMostrarTabla,listaProductos,setAgregarP
             <form ref={form} onSubmit={submitForm} className='grid grid-rows-1 w-96 border border-gray-600 bg-blue-200 m-2'>
                 <label className='text-center font-extrabold'>Registre su producto aquí..</label>
                 <label className='flex flex-col' htmlFor=" IDproducto">
-                    ID Producto
+                    IDProducto
                     <input name='IDproducto' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type='number' min={1001} max={9999} placeholder="1001" 
                      required/>
                 </label>
@@ -202,15 +210,15 @@ const FormularioCreacionProductos = ({setMostrarTabla,listaProductos,setAgregarP
                     Categoria
                     <select name='Categoria' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" required defaultValue={0}>
                         <option disabled value ={0}>Seleccione una categoria</option>
-                        <option>Comedores</option>
-                        <option>Escritorios</option>
-                        <option>Juegos de Sala</option>
-                        <option>Sillas de escritorio</option>
-                        <option>Sofás</option>
+                        <option>Accesorios Celular</option>
+                        <option>Celulares</option>
+                        <option>Computadores</option>
+                        <option>Tablets</option>
+                        <option>Televisores</option>
                     </select>
                 </label>
                 <label className='flex flex-col' htmlFor="Descripcion">
-                    Descripción
+                    Descripcion
                     <input name='Descripcion' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" placeholder="Silla Gerente Ergonómica"
                      required/>
                 </label>
