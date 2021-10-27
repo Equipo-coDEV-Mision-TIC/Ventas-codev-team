@@ -117,20 +117,30 @@ const TablaProductos = ({listaProductos,setMostrarTabla,setAgregarProducto}) =>{
 
 const FilaProductos =({productos})=>{
     const [edit,setEdit] = useState(false)
+    const [infoNuevoArticulo, setInfoNuevoArticulo] = useState({
+
+        IDproducto: productos.IDproducto,
+        Categoria: productos.Categoria,
+        Descripcion: productos.Descripcion,
+        Precio: productos.Precio
+    })
+
+    const actualizarArticulo = () =>{
+        console.log(infoNuevoArticulo)
+        setEdit(!edit)
+    }
     return(
     
         <tr>
             {edit ?(
             <>
-                <td>{productos.IDproducto}</td>
-                <td><input name='Categoria' type="text" defaultValue ={productos.Categoria} className='bg-white border border-gray-600 p-2 rounded-lg m-2'/></td>
-                <td><input name='Descripcion' type="text" defaultValue ={productos.Descripcion} className='bg-white border border-gray-600 p-2 rounded-lg m-2'/></td>
-                <td><input name='Precio' type="text" defaultValue ={productos.Precio} className='bg-white border border-gray-600 p-2 rounded-lg m-2'/></td>
+                <td>{infoNuevoArticulo.IDproducto}</td>
+                <td><input name='Categoria' type="text"  className='bg-white border border-gray-600 p-2 rounded-lg m-2' value={infoNuevoArticulo.Categoria} onChange={(e)=> setInfoNuevoArticulo({...infoNuevoArticulo, Categoria: e.target.value})}/></td>
+                <td><input name='Descripcion' type="text"   className='bg-white border border-gray-600 p-2 rounded-lg m-2' value={infoNuevoArticulo.Descripcion} onChange={(e)=> setInfoNuevoArticulo({...infoNuevoArticulo, Descripcion: e.target.value})}/></td>
+                <td><input name='Precio' type="text"   className='bg-white border border-gray-600 p-2 rounded-lg m-2' value={infoNuevoArticulo.Precio} onChange={(e)=> setInfoNuevoArticulo({...infoNuevoArticulo, Precio: e.target.value})}/></td>
                 <td>
                     <div className='flex w-full justify-around'>
-                        <button type='submit'>
-                            <i onClick={()=>setEdit(!edit)} className="fas fa-check text-green-500  hover:text-green-600"/> 
-                        </button>
+                        <i onClick={()=> actualizarArticulo()} className="fas fa-check text-green-500  hover:text-green-600"/>
                         <i className="far fa-trash-alt text-gray-500 hover:text-red-500"></i> 
                     </div>
                 </td>
