@@ -125,9 +125,26 @@ const FilaProductos =({productos})=>{
         Precio: productos.Precio
     })
 
-    const actualizarArticulo = () =>{
-        console.log(infoNuevoArticulo)
-        setEdit(!edit)
+    const actualizarArticulo = async () =>{
+        const options = {
+            method: 'PATCH',
+            url: 'http://localhost:5000/Productos/editar',
+            headers: {'Content-Type': 'application/json'},
+            data: {...infoNuevoArticulo, id: productos._id},
+            };
+
+            await axios
+            .request(options)
+            .then(function (response) {
+            console.log(response.data);
+            toast.success('Articulo modificado con éxito')
+            setEdit(false)
+            }).catch(function (error) {
+            toast.error('Error modificando articulo')
+            console.error(error);
+            });
+        //console.log(infoNuevoArticulo)
+        //setEdit(!edit)
     }
     return(
     
