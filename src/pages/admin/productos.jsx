@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react'
 import BarraTitulo from '../../components/barraTitulo'
 import { ToastContainer, toast } from 'react-toastify';
-//import { Tooltip } from '@material-ui/core';
+//import { Dialog} from '@material-ui/core@';
 import 'react-toastify/dist/ReactToastify.css';
 import {nanoid} from 'nanoid';
 import axios from "axios";
@@ -11,9 +11,9 @@ const Productos = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [textoBoton, setTextoBoton] = useState("Registrar nuevo producto");
     const [productos, setProductos] = useState([]);
+    const[ejecutarConsulta,setEjecutarConsulta] = useState(false)
 
     useEffect(() => {
-
         const obtenerProductos= async()=>{
             const options = {method: 'GET', url: 'http://localhost:5000/productos'};
 
@@ -24,12 +24,20 @@ const Productos = () => {
                 console.log(response.data)
             }).catch(function (error) {
                 console.error(error);
-             });
+            });
         }
+            if(ejecutarConsulta){
+            obtenerProductos()  
+            setEjecutarConsulta(false)
+            }   
+    }, [ejecutarConsulta])
+
+
+    useEffect(() => {  
         if (mostrarTabla){
-            obtenerProductos()
-        }
-    }, [mostrarTabla])
+        setEjecutarConsulta(true) 
+        } 
+    }, [mostrarTabla])    
     
 
     useEffect(()=>{
@@ -39,6 +47,7 @@ const Productos = () => {
             setTextoBoton('Ver listado de productos')
         }
     },[mostrarTabla]);
+    
     return (
         <div className='flex w-screen'>
             <BarraTitulo>
@@ -47,7 +56,7 @@ const Productos = () => {
             <div className='flex flex-col w-full items-center justify-center'>
                 <button onClick={()=>{setMostrarTabla(!mostrarTabla)}} className='bg-indigo-400 text-white rounded-full font-extrabold w-52 p-2 m-3'>{textoBoton}</button>
                 
-                {mostrarTabla ? <TablaProductos listaProductos = {productos}/>:<FormularioCreacionProductos setMostrarTabla={setMostrarTabla} listaProductos={productos} setAgregarProducto ={setProductos}/>}
+                {mostrarTabla ? <TablaProductos listaProductos = {productos} setEjecutarConsulta = {setEjecutarConsulta}/>:<FormularioCreacionProductos setMostrarTabla={setMostrarTabla}/>}
                 <ToastContainer
                     position="bottom-center"
                     autoClose={5000}
@@ -57,7 +66,7 @@ const Productos = () => {
     )
 }
 
-const TablaProductos = ({listaProductos,setMostrarTabla,setAgregarProducto}) =>{
+const TablaProductos = ({listaProductos,setEjecutarConsulta,setAgregarProducto}) =>{
     const[busqueda,setBusqueda]=useState('')
     const[productosFiltrados,setProductosFiltrados]=useState(listaProductos)
 
@@ -75,13 +84,12 @@ const TablaProductos = ({listaProductos,setMostrarTabla,setAgregarProducto}) =>{
         e.preventDefault();
     
         const fd = new FormData(form.current);
-
+ 
         const nuevoProducto ={};
         fd.forEach((value,key) => {
             nuevoProducto[key] =value;
         });
-        setMostrarTabla(true);
-        toast.success("Producto Actualizado correctamente");
+        
         setAgregarProducto([...listaProductos,nuevoProducto])
     }
 
@@ -104,7 +112,7 @@ const TablaProductos = ({listaProductos,setMostrarTabla,setAgregarProducto}) =>{
                 </thead>
                 <tbody className='bg-white'>
                     {productosFiltrados.map((productos)=>{
-                        return <FilaProductos key={nanoid()} productos = {productos}/>
+                        return <FilaProductos key={nanoid()} productos = {productos} setEjecutarConsulta = {setEjecutarConsulta}/>
                     })}
                     
                 </tbody>
@@ -115,7 +123,7 @@ const TablaProductos = ({listaProductos,setMostrarTabla,setAgregarProducto}) =>{
     )
 }
 
-const FilaProductos =({productos})=>{
+const FilaProductos =({productos, setEjecutarConsulta})=>{
     const [edit,setEdit] = useState(false)
     const [infoNuevoArticulo, setInfoNuevoArticulo] = useState({
 
@@ -138,6 +146,7 @@ const FilaProductos =({productos})=>{
             .then(function (response) {
             console.log(response.data);
             toast.success('Articulo modificado con éxito')
+            setEjecutarConsulta(true)
             setEdit(false)
             }).catch(function (error) {
             toast.error('Error modificando articulo')
@@ -145,6 +154,25 @@ const FilaProductos =({productos})=>{
             });
         //console.log(infoNuevoArticulo)
         //setEdit(!edit)
+    }
+
+    const eliminarArticulo = async () =>{
+    const options = {
+        method: 'DELETE',
+        url: 'http://localhost:5000/Productos/eliminar',
+        headers: {'Content-Type': 'application/json'},
+        data: {id: productos._id}
+        };
+
+        await axios
+        .request(options).then(function (response) {
+        console.log(response.data);
+        toast.success('Articulo eliminado con éxito')
+        setEjecutarConsulta(true)
+        }).catch(function (error) {
+        console.error(error);
+        toast.error('Error eliminando artículo')
+    });
     }
     return(
     
@@ -173,7 +201,7 @@ const FilaProductos =({productos})=>{
                 <td>
                     <div className='flex w-full justify-around'>
                         <i onClick={()=>setEdit(!edit)} className="fas fa-pencil-alt text-gray-500 hover:text-yellow-500"/> 
-                        <i className="far fa-trash-alt text-gray-500 hover:text-red-500"></i> 
+                        <i onClick = {()=>eliminarArticulo()} className="far fa-trash-alt text-gray-500 hover:text-red-500"></i> 
                     </div>
                 </td>
             </>
@@ -184,7 +212,7 @@ const FilaProductos =({productos})=>{
     )
 }
 
-const FormularioCreacionProductos = ({setMostrarTabla,listaProductos,setAgregarProducto}) =>{
+const FormularioCreacionProductos = ({setMostrarTabla}) =>{
     const form = useRef(null);
     const submitForm = async (e)=>{
         e.preventDefault();
