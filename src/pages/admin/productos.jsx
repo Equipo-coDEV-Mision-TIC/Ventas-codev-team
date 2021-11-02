@@ -136,9 +136,9 @@ const FilaProductos =({productos, setEjecutarConsulta})=>{
     const actualizarArticulo = async () =>{
         const options = {
             method: 'PATCH',
-            url: 'http://localhost:5000/Productos/editar',
+            url: `http://localhost:5000/Productos/${productos._id}/`,
             headers: {'Content-Type': 'application/json'},
-            data: {...infoNuevoArticulo, id: productos._id},
+            data: {...infoNuevoArticulo},
             };
 
             await axios
@@ -159,9 +159,9 @@ const FilaProductos =({productos, setEjecutarConsulta})=>{
     const eliminarArticulo = async () =>{
     const options = {
         method: 'DELETE',
-        url: 'http://localhost:5000/Productos/eliminar',
+        url: `http://localhost:5000/Productos/${productos._id}/`,
         headers: {'Content-Type': 'application/json'},
-        data: {id: productos._id}
+        //data: {id: productos._id}
         };
 
         await axios
@@ -226,7 +226,7 @@ const FormularioCreacionProductos = ({setMostrarTabla}) =>{
 
         const options = {
             method: 'POST',
-            url: 'http://localhost:5000/Productos/nuevo',
+            url: 'http://localhost:5000/Productos',
             headers: {'Content-Type': 'application/json'},
             data: {
               IDproducto: nuevoProducto.IDproducto,
