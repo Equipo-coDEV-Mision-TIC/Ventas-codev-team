@@ -5,6 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {nanoid} from 'nanoid';
 import axios from "axios";
+import {obtenerProductos} from '../../utils/api.js'
+
 
 
 const Productos = () => {
@@ -14,21 +16,10 @@ const Productos = () => {
     const[ejecutarConsulta,setEjecutarConsulta] = useState(false)
 
     useEffect(() => {
-        const obtenerProductos= async()=>{
-            const options = {method: 'GET', url: 'http://localhost:5000/productos'};
-
-            await axios
-            .request(options)
-            .then(function (response) {
-                setProductos(response.data);
-                console.log(response.data)
-            }).catch(function (error) {
-                console.error(error);
-            });
-        }
+        
             if(ejecutarConsulta){
-            obtenerProductos()  
-            setEjecutarConsulta(false)
+            obtenerProductos(setProductos)  
+            setEjecutarConsulta(false);
             }   
     }, [ejecutarConsulta])
 
