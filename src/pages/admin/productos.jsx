@@ -125,7 +125,7 @@ const TablaProductos = ({listaProductos,setEjecutarConsulta,setAgregarProducto})
 
 const FilaProductos =({productos, setEjecutarConsulta})=>{
     const [edit,setEdit] = useState(false)
-    const [infoNuevoArticulo, setInfoNuevoArticulo] = useState({
+    const [infoNuevoProducto, setInfoNuevoProducto] = useState({
 
         IDproducto: productos.IDproducto,
         Categoria: productos.Categoria,
@@ -133,30 +133,30 @@ const FilaProductos =({productos, setEjecutarConsulta})=>{
         Precio: productos.Precio
     })
 
-    const actualizarArticulo = async () =>{
+    const actualizarProducto = async () =>{
         const options = {
             method: 'PATCH',
             url: `http://localhost:5000/Productos/${productos._id}/`,
             headers: {'Content-Type': 'application/json'},
-            data: {...infoNuevoArticulo},
+            data: {...infoNuevoProducto},
             };
 
             await axios
             .request(options)
             .then(function (response) {
             console.log(response.data);
-            toast.success('Articulo modificado con éxito')
+            toast.success('Producto modificado con éxito')
             setEjecutarConsulta(true)
             setEdit(false)
             }).catch(function (error) {
-            toast.error('Error modificando articulo')
+            toast.error('Error modificando Producto')
             console.error(error);
             });
-        //console.log(infoNuevoArticulo)
+        //console.log(infoNuevoProducto)
         //setEdit(!edit)
     }
 
-    const eliminarArticulo = async () =>{
+    const eliminarProducto = async () =>{
     const options = {
         method: 'DELETE',
         url: `http://localhost:5000/Productos/${productos._id}/`,
@@ -179,13 +179,13 @@ const FilaProductos =({productos, setEjecutarConsulta})=>{
         <tr>
             {edit ?(
             <>
-                <td>{infoNuevoArticulo.IDproducto}</td>
-                <td><input name='Categoria' type="text"  className='bg-white border border-gray-600 p-2 rounded-lg m-2' value={infoNuevoArticulo.Categoria} onChange={(e)=> setInfoNuevoArticulo({...infoNuevoArticulo, Categoria: e.target.value})}/></td>
-                <td><input name='Descripcion' type="text"   className='bg-white border border-gray-600 p-2 rounded-lg m-2' value={infoNuevoArticulo.Descripcion} onChange={(e)=> setInfoNuevoArticulo({...infoNuevoArticulo, Descripcion: e.target.value})}/></td>
-                <td><input name='Precio' type="text"   className='bg-white border border-gray-600 p-2 rounded-lg m-2' value={infoNuevoArticulo.Precio} onChange={(e)=> setInfoNuevoArticulo({...infoNuevoArticulo, Precio: e.target.value})}/></td>
+                <td>{infoNuevoProducto.IDproducto}</td>
+                <td><input name='Categoria' type="text"  className='bg-white border border-gray-600 p-2 rounded-lg m-2' value={infoNuevoProducto.Categoria} onChange={(e)=> setInfoNuevoProducto({...infoNuevoProducto, Categoria: e.target.value})}/></td>
+                <td><input name='Descripcion' type="text"   className='bg-white border border-gray-600 p-2 rounded-lg m-2' value={infoNuevoProducto.Descripcion} onChange={(e)=> setInfoNuevoProducto({...infoNuevoProducto, Descripcion: e.target.value})}/></td>
+                <td><input name='Precio' type="text"   className='bg-white border border-gray-600 p-2 rounded-lg m-2' value={infoNuevoProducto.Precio} onChange={(e)=> setInfoNuevoProducto({...infoNuevoProducto, Precio: e.target.value})}/></td>
                 <td>
                     <div className='flex w-full justify-around'>
-                        <i onClick={()=> actualizarArticulo()} className="fas fa-check text-green-500  hover:text-green-600"/>
+                        <i onClick={()=> actualizarProducto()} className="fas fa-check text-green-500  hover:text-green-600"/>
                         <i className="far fa-trash-alt text-gray-500 hover:text-red-500"></i> 
                     </div>
                 </td>
@@ -201,7 +201,7 @@ const FilaProductos =({productos, setEjecutarConsulta})=>{
                 <td>
                     <div className='flex w-full justify-around'>
                         <i onClick={()=>setEdit(!edit)} className="fas fa-pencil-alt text-gray-500 hover:text-yellow-500"/> 
-                        <i onClick = {()=>eliminarArticulo()} className="far fa-trash-alt text-gray-500 hover:text-red-500"></i> 
+                        <i onClick = {()=>eliminarProducto()} className="far fa-trash-alt text-gray-500 hover:text-red-500"></i> 
                     </div>
                 </td>
             </>
