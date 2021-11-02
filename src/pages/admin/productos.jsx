@@ -4,8 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 //import { Dialog} from '@material-ui/core@';
 import 'react-toastify/dist/ReactToastify.css';
 import {nanoid} from 'nanoid';
-import axios from "axios";
-import {obtenerProductos} from '../../utils/api.js'
+import {crearProducto, editarProductos, eliminarProductos, obtenerProductos} from '../../utils/api.js'
 
 
 
@@ -13,7 +12,7 @@ const Productos = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [textoBoton, setTextoBoton] = useState("Registrar nuevo producto");
     const [productos, setProductos] = useState([]);
-    const[ejecutarConsulta,setEjecutarConsulta] = useState(false)
+    const[ejecutarConsulta,setEjecutarConsulta] = useState(true)
 
     useEffect(() => {
         
@@ -24,7 +23,7 @@ const Productos = () => {
                 console.error(error)
             })  
             setEjecutarConsulta(false);
-            }   
+        }   
     }, [ejecutarConsulta])
 
 
@@ -129,45 +128,38 @@ const FilaProductos =({productos, setEjecutarConsulta})=>{
     })
 
     const actualizarProducto = async () =>{
-        const options = {
-            method: 'PATCH',
-            url: `http://localhost:5000/Productos/${productos._id}/`,
-            headers: {'Content-Type': 'application/json'},
-            data: {...infoNuevoProducto},
-            };
-
-            await axios
-            .request(options)
-            .then(function (response) {
-            console.log(response.data);
-            toast.success('Producto modificado con éxito')
-            setEjecutarConsulta(true)
-            setEdit(false)
-            }).catch(function (error) {
-            toast.error('Error modificando Producto')
-            console.error(error);
-            });
-        //console.log(infoNuevoProducto)
-        //setEdit(!edit)
+        
+        await editarProductos(productos._id,infoNuevoProducto,
+            (response)=>{
+                console.log(response.data);
+                toast.success('Producto modificado con éxito')
+                setEjecutarConsulta(true)
+                setEdit(false)
+            },
+            
+            (error)=>{
+                console.error('Error modificando el Producto')
+                console.error(error);
+            }
+        )
+            
     }
 
     const eliminarProducto = async () =>{
-    const options = {
-        method: 'DELETE',
-        url: `http://localhost:5000/Productos/${productos._id}/`,
-        headers: {'Content-Type': 'application/json'},
-        //data: {id: productos._id}
-        };
 
-        await axios
-        .request(options).then(function (response) {
-        console.log(response.data);
-        toast.success('Articulo eliminado con éxito')
-        setEjecutarConsulta(true)
-        }).catch(function (error) {
-        console.error(error);
-        toast.error('Error eliminando artículo')
-    });
+        await eliminarProductos(productos._id,
+            (response)=>{
+                console.log(response.data);
+                toast.success('Producto eliminado con éxito')
+                setEjecutarConsulta(true)
+                setEdit(false)
+            },
+            
+            (error)=>{
+                console.error('Error eliminando el Producto')
+                console.error(error);
+            }
+        )
     }
     return(
     
@@ -218,30 +210,25 @@ const FormularioCreacionProductos = ({setMostrarTabla}) =>{
         fd.forEach((value,key) => {
             nuevoProducto[key] =value;
         });
-
-        const options = {
-            method: 'POST',
-            url: 'http://localhost:5000/Productos',
-            headers: {'Content-Type': 'application/json'},
-            data: {
-              IDproducto: nuevoProducto.IDproducto,
-              Categoria: nuevoProducto.Categoria,
-              Descripcion: nuevoProducto.Descripcion,
-              Precio: nuevoProducto.Precio
-            }
-          };
-
-        await axios
-        .request(options).then(function (response) {
+        await crearProducto({
+            
+            IDproducto: nuevoProducto.IDproducto,
+            Categoria: nuevoProducto.Categoria,
+            Descripcion: nuevoProducto.Descripcion,
+            Precio: nuevoProducto.Precio
+        },
+        
+        (response)=>{
             console.log(response.data);
-            toast.success("Producto registrado correctamente");
-          }).catch(function (error) {
-            console.error(error);
-            toast.error("No se pudo agregar el producto");
-        });
-        setMostrarTabla(true);
+            toast.success('Articulo creado con éxito')
+        },
         
+        (error)=>{
+            console.error('Error creando el Producto')
+        }
+          )
         
+      setMostrarTabla(true)  
     }
 
     return(
