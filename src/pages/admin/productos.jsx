@@ -18,7 +18,11 @@ const Productos = () => {
     useEffect(() => {
         
             if(ejecutarConsulta){
-            obtenerProductos(setProductos)  
+            obtenerProductos((response)=>{
+                setProductos(response.data)
+            },(error)=>{
+                console.error(error)
+            })  
             setEjecutarConsulta(false);
             }   
     }, [ejecutarConsulta])
