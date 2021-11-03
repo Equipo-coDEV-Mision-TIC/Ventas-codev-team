@@ -7,7 +7,7 @@ const LayoutAdmin = ({children}) => {
         <div className='flex w-screen h-screen'>
             <div className ='flex flex-nowrap w-full h-full'>
                 <Sidebar/>
-                <main className='flex w-full bg-green-50 overflow-y-scroll items-center justify-center'>
+                <main className='flex w-full bg-green-50 overflow-y-scroll  items-center justify-around'>
                     {children}
                 </main>
             </div>
