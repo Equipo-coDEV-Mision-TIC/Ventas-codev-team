@@ -8,6 +8,7 @@ import {crearVenta, editarVentas, eliminarVentas, obtenerUsuarios, obtenerVentas
 
 
 
+
 const Ventas = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [textoBoton, setTextoBoton] = useState("Registrar nueva venta");

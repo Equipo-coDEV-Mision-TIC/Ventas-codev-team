@@ -25,8 +25,8 @@ ul{
 
 .rectanguloLogin {
   background:#2F4A4E8F;
-  width: 980px;
-  height: 650px;
+  width: 700px;
+  height: 500px;
   position:fixed;
   top: 100px;
   left: 500px;
@@ -39,19 +39,6 @@ ul{
   width: max-content;
   height:min-content;
 }
-.rectanguloTransparente{
-  background:#FFFFFF;
-  width: 1786px;
-  height: 800px;
-  position:absolute;
-  top: 65px;
-  left: 65px;
-  border-radius: 86px;
-  border-color: black;
-  list-style: none;
-  opacity: 0.4;
-}
-
 
 .logo{
   width: 400px;
