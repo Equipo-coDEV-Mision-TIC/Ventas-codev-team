@@ -16,7 +16,7 @@ import {
 
 function App() {
   return (
-    <Auth0Provider domain="ventas-misiontic.us.auth0.com" clientId="3rfEJuOcWXxkmNFsQJXjZ06p2VCNjYPl" redirectUri='https://polar-sea-28372.herokuapp.com'>
+    <Auth0Provider domain="ventas-misiontic.us.auth0.com" clientId="3rfEJuOcWXxkmNFsQJXjZ06p2VCNjYPl" redirectUri='https://polar-sea-28372.herokuapp.com/Home'>
       <div>
         <Router>
           <Switch>
