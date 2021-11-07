@@ -1,17 +1,20 @@
 import React from 'react'
 import BarraTitulo from '../../components/barraTitulo'
+import logo from '../../media/logo3.png'
 
 const home = () => {
     return (
-        <div>
+        <div className='flex flex-col items-center justify-center'>
                 <BarraTitulo>
-                    Home
+                    Bienvenido...
                 </BarraTitulo>
-
-                <div className='w-60 h-60 bg-blue-300 text-white rounded-md'>
-                    Bienvenido...Esta es la página de gestión de ventas
-                    navega por cada uno de los botones de la barra lateral izquierda para acceder a cada uno de los módulos.
+                <div>
+                    <img src={logo} alt="logo" width = "500" height = "500"/>
                 </div>
+
+                <div className='text-4xl'>
+                    Gestión de ventas coDev team
+                </div >
         </div>  
     )
 }
