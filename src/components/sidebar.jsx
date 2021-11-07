@@ -2,8 +2,10 @@ import React from 'react'
 import logo from '../media/logo3.png'
 import {Link} from 'react-router-dom'
 import Fondo from '../media/fondoSideBar4.png'
+import { useAuth0 } from "@auth0/auth0-react";
 
-const sidebar = () => {
+const Sidebar = () => {
+    const { logout } = useAuth0();
     return (
             <nav className='w-80'>
                 <img className='w-full h-full' src={Fondo} alt="Fondo"/>
@@ -46,7 +48,7 @@ const sidebar = () => {
                     
                     <Link to = '/'>
                         <li>
-                            <button className = "buttonList">Salir</button>
+                            <button onClick={() => logout({ returnTo: window.location.origin })} className = "buttonList">Cerrar Sesion</button>
                         </li>
                     </Link>
                 </ul>
@@ -60,4 +62,4 @@ const sidebar = () => {
     )
 }
 
-export default sidebar
+export default Sidebar
