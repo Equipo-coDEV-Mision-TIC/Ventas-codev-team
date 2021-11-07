@@ -9,7 +9,8 @@ const home = () => {
                 </BarraTitulo>
 
                 <div>
-                    HOLA,ESTA ES LA PAGINA DE HOME
+                    Bienvenido. Esta es la página de gestión de ventas
+                    navega por cada uno de los botones de la barra lateral izquierda para acceder a cada uno de los módulos.
                 </div>
         </div>  
     )
