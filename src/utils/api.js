@@ -2,7 +2,7 @@ import axios from 'axios'
 
 //CRUD PARA PRODUCTOS
 export const obtenerProductos= async(succesCallback,errorCallback)=>{
-    const options = {method: 'GET', url: 'http://localhost:5000/productos'};
+    const options = {method: 'GET', url: 'https://thawing-springs-56523.herokuapp.com/productos'};
 
     await axios
     .request(options)
@@ -12,7 +12,7 @@ export const obtenerProductos= async(succesCallback,errorCallback)=>{
 export const crearProducto= async(data, succesCallback,errorCallback)=>{
     const options = {
         method: 'POST',
-        url: 'http://localhost:5000/Productos',
+        url: 'https://thawing-springs-56523.herokuapp.com/Productos',
         headers: {'Content-Type': 'application/json'},
         data
         }
@@ -25,7 +25,7 @@ export const editarProductos= async(id,data,succesCallback,errorCallback)=>{
 
     const options = {
         method: 'PATCH',
-        url: `http://localhost:5000/Productos/${id}/`,
+        url: `https://thawing-springs-56523.herokuapp.com/Productos/${id}/`,
         headers: {'Content-Type': 'application/json'},
         data
         };
@@ -40,7 +40,7 @@ export const eliminarProductos= async(id,succesCallback,errorCallback)=>{
 
     const options = {
         method: 'DELETE',
-        url: `http://localhost:5000/Productos/${id}/`,
+        url: `https://thawing-springs-56523.herokuapp.com/Productos/${id}/`,
         headers: {'Content-Type': 'application/json'},
         };
     
@@ -54,7 +54,7 @@ export const eliminarProductos= async(id,succesCallback,errorCallback)=>{
 //CRUD PARA VENTAS
 
 export const obtenerVentas= async(succesCallback,errorCallback)=>{
-        const options = {method: 'GET', url: 'http://localhost:5000/ventas'};
+        const options = {method: 'GET', url: 'https://thawing-springs-56523.herokuapp.com/ventas'};
     
         await axios
         .request(options)
@@ -64,7 +64,7 @@ export const obtenerVentas= async(succesCallback,errorCallback)=>{
 export const crearVenta= async(data, succesCallback,errorCallback)=>{
         const options = {
             method: 'POST',
-            url: 'http://localhost:5000/Ventas',
+            url: 'https://thawing-springs-56523.herokuapp.com/Ventas',
             headers: {'Content-Type': 'application/json'},
             data
             }
@@ -77,7 +77,7 @@ export const editarVentas= async(id,data,succesCallback,errorCallback)=>{
     
         const options = {
             method: 'PATCH',
-            url: `http://localhost:5000/Ventas/${id}/`,
+            url: `https://thawing-springs-56523.herokuapp.com/Ventas/${id}/`,
             headers: {'Content-Type': 'application/json'},
             data
             };
@@ -92,7 +92,7 @@ export const eliminarVentas= async(id,succesCallback,errorCallback)=>{
     
         const options = {
             method: 'DELETE',
-            url: `http://localhost:5000/Ventas/${id}/`,
+            url: `https://thawing-springs-56523.herokuapp.com/Ventas/${id}/`,
             headers: {'Content-Type': 'application/json'},
             };
         
@@ -105,7 +105,7 @@ export const eliminarVentas= async(id,succesCallback,errorCallback)=>{
 //CRUD PARA USUARIOS
 
 export const obtenerUsuarios= async(succesCallback,errorCallback)=>{
-    const options = {method: 'GET', url: 'http://localhost:5000/Usuarios'};
+    const options = {method: 'GET', url: 'https://thawing-springs-56523.herokuapp.com/Usuarios'};
 
     await axios
     .request(options)
