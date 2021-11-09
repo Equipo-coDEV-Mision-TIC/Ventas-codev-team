@@ -16,7 +16,11 @@ import {
 
 function App() {
   return (
-    <Auth0Provider domain="ventas-misiontic.us.auth0.com" clientId="3rfEJuOcWXxkmNFsQJXjZ06p2VCNjYPl" redirectUri='https://polar-sea-28372.herokuapp.com/Home'>
+    <Auth0Provider 
+    domain="ventas-misiontic.us.auth0.com" 
+    clientId="3rfEJuOcWXxkmNFsQJXjZ06p2VCNjYPl" 
+    redirectUri='https://polar-sea-28372.herokuapp.com/Home'
+    audience="Api-Auth-TiendaTec">  
       <div>
         <Router>
           <Switch>

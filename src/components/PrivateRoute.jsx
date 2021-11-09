@@ -1,9 +1,22 @@
-import { useUser } from 'context/userContext';
-import React from 'react';
+import { useUser  } from 'context/userContext';
+import React, {useEffect} from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
 const PrivateRoute = ({ roleList, children }) => {
-  const {isAuthenticated, isLoading } = useAuth0();
+  const {isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+
+  useEffect(()=>{
+
+    const fetchAuth0Token = async ()=>{
+     
+      const accesToken = await getAccessTokenSilently({
+      audience: `Api-Auth-TiendaTec`,
+      
+    });
+    console.log(accesToken)
+    };
+    fetchAuth0Token();
+  },[])
 
   if (isLoading) return<div className='text-9xl text-red-500 '>Loading...</div>;
 
