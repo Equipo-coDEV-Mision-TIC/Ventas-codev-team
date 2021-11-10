@@ -2,17 +2,16 @@ import { useUser  } from 'context/userContext';
 import React, {useEffect} from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
-const PrivateRoute = ({ roleList, children }) => {
+const PrivateRoute = ({ children }) => {
   const {isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
   useEffect(()=>{
 
     const fetchAuth0Token = async ()=>{
-     
-      const accesToken = await getAccessTokenSilently({
-      audience: `Api-Auth-TiendaTec`,
-      
+    const accesToken = await getAccessTokenSilently({
+    audience: `Api-Auth-TiendaTec`,  
     });
+    localStorage.setItem('token', accesToken);
     console.log(accesToken)
     };
     if(isAuthenticated){
