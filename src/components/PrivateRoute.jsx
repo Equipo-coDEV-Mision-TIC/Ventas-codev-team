@@ -15,8 +15,11 @@ const PrivateRoute = ({ roleList, children }) => {
     });
     console.log(accesToken)
     };
-    fetchAuth0Token();
-  },[])
+    if(isAuthenticated){
+
+      fetchAuth0Token();
+    }
+  },[isAuthenticated, getAccessTokenSilently])
 
   if (isLoading) return<div className='text-9xl text-red-500 '>Loading...</div>;
 
