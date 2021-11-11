@@ -12,7 +12,7 @@ const Productos = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [textoBoton, setTextoBoton] = useState("Registrar nuevo producto");
     const [productos, setProductos] = useState([]);
-    const[ejecutarConsulta,setEjecutarConsulta] = useState(true)
+    const[ejecutarConsulta,setEjecutarConsulta] = useState(false)
 
     useEffect(() => {
         

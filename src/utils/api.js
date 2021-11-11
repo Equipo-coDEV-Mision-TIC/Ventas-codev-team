@@ -21,7 +21,7 @@ export const crearProducto= async(data, succesCallback,errorCallback)=>{
     const options = {
         method: 'POST',
         url: 'http://localhost:5000/Productos',
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json',Authorization: getToken()},
         data,
         
         }
@@ -35,7 +35,7 @@ export const editarProductos= async(id,data,succesCallback,errorCallback)=>{
     const options = {
         method: 'PATCH',
         url: `http://localhost:5000/Productos/${id}/`,
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json',Authorization: getToken()},
         data,
         };
     
@@ -50,7 +50,7 @@ export const eliminarProductos= async(id,succesCallback,errorCallback)=>{
     const options = {
         method: 'DELETE',
         url: `http://localhost:5000/Productos/${id}/`,
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json',Authorization: getToken()},
         };
     
 

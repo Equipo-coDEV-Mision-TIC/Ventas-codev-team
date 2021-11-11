@@ -6,6 +6,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Sidebar = () => {
     const { logout } = useAuth0();
+    
+    const cerrarSesion = () => {
+        logout({ returnTo: window.location.origin })
+        localStorage.setItem('token', null);
+      };
     return (
             <nav className='w-80'>
                 <img className='w-full h-full' src={Fondo} alt="Fondo"/>
@@ -48,7 +53,7 @@ const Sidebar = () => {
                     
                     <Link to = '/'>
                         <li>
-                            <button onClick={() => logout({ returnTo: window.location.origin })} className = "buttonList">Cerrar Sesion</button>
+                            <button onClick={() => cerrarSesion()} className = "buttonList">Cerrar Sesion</button>
                         </li>
                     </Link>
                 </ul>
