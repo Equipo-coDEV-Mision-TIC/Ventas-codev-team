@@ -63,8 +63,11 @@ export const eliminarProductos= async(id,succesCallback,errorCallback)=>{
 //CRUD PARA VENTAS
 
 export const obtenerVentas= async(succesCallback,errorCallback)=>{
-        const options = {method: 'GET', url: 'https://thawing-springs-56523.herokuapp.com/ventas'};
-    
+        const options = {method: 'GET', url: 'http://localhost:5000/Ventas',
+        headers: {
+            Authorization: getToken(),
+          },
+        };
         await axios
         .request(options)
         .then(succesCallback).catch(errorCallback) 
@@ -73,8 +76,8 @@ export const obtenerVentas= async(succesCallback,errorCallback)=>{
 export const crearVenta= async(data, succesCallback,errorCallback)=>{
         const options = {
             method: 'POST',
-            url: 'https://thawing-springs-56523.herokuapp.com/Ventas',
-            headers: {'Content-Type': 'application/json'},
+            url: 'http://localhost:5000/Ventas',
+            headers: {'Content-Type': 'application/json',Authorization: getToken()},
             data
             }
             await axios
@@ -86,8 +89,8 @@ export const editarVentas= async(id,data,succesCallback,errorCallback)=>{
     
         const options = {
             method: 'PATCH',
-            url: `https://thawing-springs-56523.herokuapp.com/Ventas/${id}/`,
-            headers: {'Content-Type': 'application/json'},
+            url: `http://localhost:5000/Ventas/${id}/`,
+            headers: {'Content-Type': 'application/json',Authorization: getToken()},
             data
             };
         
@@ -101,8 +104,8 @@ export const eliminarVentas= async(id,succesCallback,errorCallback)=>{
     
         const options = {
             method: 'DELETE',
-            url: `https://thawing-springs-56523.herokuapp.com/Ventas/${id}/`,
-            headers: {'Content-Type': 'application/json'},
+            url: `http://localhost:5000/Ventas/${id}/`,
+            headers: {'Content-Type': 'application/json',Authorization: getToken()},
             };
         
     
@@ -114,7 +117,11 @@ export const eliminarVentas= async(id,succesCallback,errorCallback)=>{
 //CRUD PARA USUARIOS
 
 export const obtenerUsuarios= async(succesCallback,errorCallback)=>{
-    const options = {method: 'GET', url: 'https://thawing-springs-56523.herokuapp.com/Usuarios'};
+    const options = {method: 'GET', url: 'http://localhost:5000/Usuarios',
+    headers: {
+        Authorization: getToken(),
+      },
+    }
 
     await axios
     .request(options)
