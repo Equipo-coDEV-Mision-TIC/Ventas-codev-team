@@ -1,24 +1,21 @@
 import axios from 'axios'
 
-
-const getToken = ()=>{
-    return `Bearer ${localStorage.getItem('token')}`;
-};
-
 //CRUD PARA PRODUCTOS
-export const obtenerProductos= async(succesCallback,errorCallback)=>{
+const getToken = () => {
+    return `Bearer ${localStorage.getItem('token')}`;
+  };
+  
+  export const obtenerProductos = async (successCallback, errorCallback) => {
     const options = {
-        method: 'GET', 
-        url: 'http://localhost:5000/Productos',
-        headers: {
-            Authorization: getToken(),
-        },
-};
+      method: 'GET',
+      url: `http://localhost:5000/Productos/`,
+      headers: {
+        Authorization: getToken(),
+      },
+    };
+    await axios.request(options).then(successCallback).catch(errorCallback);
+  };
 
-    await axios
-    .request(options)
-    .then(succesCallback).catch(errorCallback) 
-}
 
 export const crearProducto= async(data, succesCallback,errorCallback)=>{
     const options = {

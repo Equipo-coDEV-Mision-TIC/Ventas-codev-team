@@ -1,4 +1,4 @@
-import { useUser  } from 'context/userContext';
+
 import React, {useEffect} from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -12,10 +12,10 @@ const PrivateRoute = ({ children }) => {
     audience: `Api-Auth-TiendaTec`,  
     });
     localStorage.setItem('token', accesToken);
-    console.log(accesToken)
+  
     };
+    console.log('prueba de fucionamiento')
     if(isAuthenticated){
-
       fetchAuth0Token();
     }
   },[isAuthenticated, getAccessTokenSilently])
