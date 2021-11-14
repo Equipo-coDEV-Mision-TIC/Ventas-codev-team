@@ -32,4 +32,4 @@ const PrivateRoute = ({ children }) => {
 
   return isAuthenticated ? <>{children}</> : <div className='text-9xl text-red-500 '>No estás autorizado para ver este sitio.</div>;
   } 
-export default PrivateRoute;
+export default PrivateRoute
