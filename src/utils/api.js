@@ -1,6 +1,6 @@
 import axios from 'axios'
 // const baseURL = "http://localhost:5000"
-const baseURL = 'https://thawing-springs-56523.herokuapp.com/';
+const baseURL = 'https://thawing-springs-56523.herokuapp.com';
 
 //CRUD PARA PRODUCTOS
 const getToken = () => {
@@ -65,7 +65,7 @@ export const eliminarProductos= async(id,succesCallback,errorCallback)=>{
 //CRUD PARA VENTAS
 
 export const obtenerVentas= async(succesCallback,errorCallback)=>{
-        const options = {method: 'GET', url: `${baseURL}:5000/Ventas`,
+        const options = {method: 'GET', url: `${baseURL}/Ventas`,
         headers: {
             Authorization: getToken(),
           },
