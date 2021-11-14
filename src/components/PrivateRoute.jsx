@@ -10,7 +10,7 @@ const PrivateRoute = ({ children }) => {
 
     const fetchAuth0Token = async ()=>{
     const accesToken = await getAccessTokenSilently({
-    audience: `Api-Auth-TiendaTec`,  
+    audience: 'Api-Auth-TiendaTec',  
     });
     localStorage.setItem('token', accesToken);
     console.log(accesToken)

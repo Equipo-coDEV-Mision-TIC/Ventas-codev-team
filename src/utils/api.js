@@ -1,4 +1,6 @@
 import axios from 'axios'
+// const baseURL = "http://localhost:5000"
+const baseURL = 'https://thawing-springs-56523.herokuapp.com/';
 
 //CRUD PARA PRODUCTOS
 const getToken = () => {
@@ -8,7 +10,7 @@ const getToken = () => {
   export const obtenerProductos = async (successCallback, errorCallback) => {
     const options = {
       method: 'GET',
-      url: `http://localhost:5000/Productos/`,
+      url: `${baseURL}/Productos`,
       headers: {
         Authorization: getToken(),
       },
@@ -20,7 +22,7 @@ const getToken = () => {
 export const crearProducto= async(data, succesCallback,errorCallback)=>{
     const options = {
         method: 'POST',
-        url: 'http://localhost:5000/Productos',
+        url: `${baseURL}/Productos`,
         headers: {'Content-Type': 'application/json',Authorization: getToken()},
         data,
         
@@ -34,7 +36,7 @@ export const editarProductos= async(id,data,succesCallback,errorCallback)=>{
 
     const options = {
         method: 'PATCH',
-        url: `http://localhost:5000/Productos/${id}/`,
+        url: `${baseURL}/Productos/${id}/`,
         headers: {'Content-Type': 'application/json',Authorization: getToken()},
         data,
         };
@@ -49,7 +51,7 @@ export const eliminarProductos= async(id,succesCallback,errorCallback)=>{
 
     const options = {
         method: 'DELETE',
-        url: `http://localhost:5000/Productos/${id}/`,
+        url: `${baseURL}/Productos/${id}/`,
         headers: {'Content-Type': 'application/json',Authorization: getToken()},
         };
     
@@ -63,7 +65,7 @@ export const eliminarProductos= async(id,succesCallback,errorCallback)=>{
 //CRUD PARA VENTAS
 
 export const obtenerVentas= async(succesCallback,errorCallback)=>{
-        const options = {method: 'GET', url: 'http://localhost:5000/Ventas',
+        const options = {method: 'GET', url: `${baseURL}:5000/Ventas`,
         headers: {
             Authorization: getToken(),
           },
@@ -76,7 +78,7 @@ export const obtenerVentas= async(succesCallback,errorCallback)=>{
 export const crearVenta= async(data, succesCallback,errorCallback)=>{
         const options = {
             method: 'POST',
-            url: 'http://localhost:5000/Ventas',
+            url: `${baseURL}/Ventas`,
             headers: {'Content-Type': 'application/json',Authorization: getToken()},
             data
             }
@@ -89,7 +91,7 @@ export const editarVentas= async(id,data,succesCallback,errorCallback)=>{
     
         const options = {
             method: 'PATCH',
-            url: `http://localhost:5000/Ventas/${id}/`,
+            url: `${baseURL}/Ventas/${id}/`,
             headers: {'Content-Type': 'application/json',Authorization: getToken()},
             data
             };
@@ -104,7 +106,7 @@ export const eliminarVentas= async(id,succesCallback,errorCallback)=>{
     
         const options = {
             method: 'DELETE',
-            url: `http://localhost:5000/Ventas/${id}/`,
+            url: `${baseURL}/Ventas/${id}/`,
             headers: {'Content-Type': 'application/json',Authorization: getToken()},
             };
         
@@ -117,7 +119,7 @@ export const eliminarVentas= async(id,succesCallback,errorCallback)=>{
 //CRUD PARA USUARIOS
 
 export const obtenerUsuarios= async(succesCallback,errorCallback)=>{
-    const options = {method: 'GET', url: 'http://localhost:5000/Usuarios',
+    const options = {method: 'GET', url: `${baseURL}/Usuarios`,
     headers: {
         Authorization: getToken(),
       },
@@ -131,7 +133,7 @@ export const obtenerUsuarios= async(succesCallback,errorCallback)=>{
 export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
     const options = {
       method: 'GET',
-      url: 'http://localhost:5000/Usuarios/self',
+      url: `${baseURL}/Usuarios/self`,
       headers: {
         Authorization: getToken(), // 3. enviarle el token a backend
       },
