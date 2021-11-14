@@ -127,3 +127,14 @@ export const obtenerUsuarios= async(succesCallback,errorCallback)=>{
     .request(options)
     .then(succesCallback).catch(errorCallback) 
 }
+
+export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
+    const options = {
+      method: 'GET',
+      url: 'http://localhost:5000/Usuarios/self',
+      headers: {
+        Authorization: getToken(), // 3. enviarle el token a backend
+      },
+    };
+    await axios.request(options).then(successCallback).catch(errorCallback);
+  };
