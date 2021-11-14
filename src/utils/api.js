@@ -10,7 +10,7 @@ const getToken = () => {
   export const obtenerProductos = async (successCallback, errorCallback) => {
     const options = {
       method: 'GET',
-      url: `${baseURL}/Productos`,
+      url: `${baseURL}/Productos/`,
       headers: {
         Authorization: getToken(),
       },
@@ -22,7 +22,7 @@ const getToken = () => {
 export const crearProducto= async(data, succesCallback,errorCallback)=>{
     const options = {
         method: 'POST',
-        url: `${baseURL}/Productos`,
+        url: `${baseURL}/Productos/`,
         headers: {'Content-Type': 'application/json',Authorization: getToken()},
         data,
         
@@ -65,7 +65,7 @@ export const eliminarProductos= async(id,succesCallback,errorCallback)=>{
 //CRUD PARA VENTAS
 
 export const obtenerVentas= async(succesCallback,errorCallback)=>{
-        const options = {method: 'GET', url: `${baseURL}/Ventas`,
+        const options = {method: 'GET', url: `${baseURL}/Ventas/`,
         headers: {
             Authorization: getToken(),
           },
@@ -78,7 +78,7 @@ export const obtenerVentas= async(succesCallback,errorCallback)=>{
 export const crearVenta= async(data, succesCallback,errorCallback)=>{
         const options = {
             method: 'POST',
-            url: `${baseURL}/Ventas`,
+            url: `${baseURL}/Ventas/`,
             headers: {'Content-Type': 'application/json',Authorization: getToken()},
             data
             }
@@ -119,7 +119,7 @@ export const eliminarVentas= async(id,succesCallback,errorCallback)=>{
 //CRUD PARA USUARIOS
 
 export const obtenerUsuarios= async(succesCallback,errorCallback)=>{
-    const options = {method: 'GET', url: `${baseURL}/Usuarios`,
+    const options = {method: 'GET', url: `${baseURL}/Usuarios/`,
     headers: {
         Authorization: getToken(),
       },
@@ -133,7 +133,7 @@ export const obtenerUsuarios= async(succesCallback,errorCallback)=>{
 export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
     const options = {
       method: 'GET',
-      url: `${baseURL}/Usuarios/self`,
+      url: `${baseURL}/Usuarios/self/`,
       headers: {
         Authorization: getToken(), // 3. enviarle el token a backend
       },
