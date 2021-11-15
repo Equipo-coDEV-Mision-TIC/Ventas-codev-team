@@ -8,9 +8,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 const PaginaLogin = () => {
     const { loginWithRedirect } = useAuth0();
     return (
-        <LayoutLogin> 
+        <LayoutLogin overflow-x-scroll > 
             
-            <div className='flex w-full h-1/4'>
+            <div className='flex w-full h-1/4 overflow-x-scroll '>
                 <img src= {fondo} alt="imagen fondo"/>             
             </div>
             

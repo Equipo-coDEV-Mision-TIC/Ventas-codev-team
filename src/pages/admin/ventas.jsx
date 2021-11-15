@@ -99,6 +99,8 @@ const TablaVentas = ({listaVentas,setEjecutarConsulta,setAgregarVenta}) =>{
                 <thead className='bg-blue-200'>
                     <tr>
                         <th className='w-64'>IDVentas</th>
+                        <th className='w-64'>IDCliente</th>
+                        <th className='w-64'>Cliente</th>
                         <th className='w-64'>Vendedor</th>
                         <th>Producto</th>
                         <th>Valor</th>
@@ -123,10 +125,28 @@ const FilaVentas =({Ventas, setEjecutarConsulta})=>{
     const [infoNuevoVenta, setInfoNuevoVenta] = useState({
 
         IDventa: Ventas.IDventa,
+        IDCliente: Ventas.IDCliente,
+        Cliente: Ventas.Cliente,
         Vendedor: Ventas.Vendedor,
         Producto: Ventas.Producto,
         Valor: Ventas.Valor
     })
+
+    const[vendedores,setVendedores] = useState([])
+
+    useEffect(() => {
+        const fetchVendedores = async () => {
+
+            await obtenerUsuarios(
+                (response)=>{
+                    setVendedores(response.data)
+                    console.log('respuesta de usuarios', response)
+                },
+                (error)=>{console.error(error)}
+                );
+        }
+        fetchVendedores();
+    }, [])
 
     const actualizarVenta = async () =>{
         
@@ -164,11 +184,27 @@ const FilaVentas =({Ventas, setEjecutarConsulta})=>{
     }
     return(
     
+
+
+
+
+
         <tr>
             {edit ?(
             <>
                 <td>{infoNuevoVenta.IDventa}</td>
-                <td><input name='Vendedor' type="text"  className='bg-white border border-gray-600 p-2 rounded-lg m-2' value={infoNuevoVenta.Vendedor} onChange={(e)=> setInfoNuevoVenta({...infoNuevoVenta, Vendedor: e.target.value})}/></td>
+                <td><input name='IDCliente' type="text"  className='bg-white border border-gray-600 p-2 rounded-lg m-2' value={infoNuevoVenta.IDCliente} onChange={(e)=> setInfoNuevoVenta({...infoNuevoVenta, IDCliente: e.target.value})}/></td>
+                <td><input name='Cliente' type="text"  className='bg-white border border-gray-600 p-2 rounded-lg m-2' value={infoNuevoVenta.Cliente} onChange={(e)=> setInfoNuevoVenta({...infoNuevoVenta, Cliente: e.target.value})}/></td>
+                <td>
+                <label className='flex flex-col' htmlFor="Vendedor">
+                    <select name='Vendedor' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" required defaultValue={0} value={infoNuevoVenta.Vendedor} onChange={(e)=> setInfoNuevoVenta({...infoNuevoVenta, Vendedor: e.target.value})}>
+                        <option disabled value ={0}>Seleccione un vendedor</option>
+                        {vendedores.map((el)=>{
+                            return <option>{`${el.Nombre}${el.Apellido}`}</option>
+                        })}
+                    </select>
+                </label>
+                </td>
                 <td><input name='Producto' type="text"   className='bg-white border border-gray-600 p-2 rounded-lg m-2' value={infoNuevoVenta.Producto} onChange={(e)=> setInfoNuevoVenta({...infoNuevoVenta, Producto: e.target.value})}/></td>
                 <td><input name='Valor' type="text"   className='bg-white border border-gray-600 p-2 rounded-lg m-2' value={infoNuevoVenta.Valor} onChange={(e)=> setInfoNuevoVenta({...infoNuevoVenta, Valor: e.target.value})}/></td>
                 <td>
@@ -181,6 +217,8 @@ const FilaVentas =({Ventas, setEjecutarConsulta})=>{
            ):(
             <>
                 <td>{Ventas.IDventa}</td>
+                <td>{Ventas.IDCliente}</td>
+                <td>{Ventas.Cliente}</td>
                 <td>
                     {Ventas.Vendedor}
                 </td>
@@ -231,6 +269,8 @@ const FormularioCreacionVentas = ({setMostrarTabla}) =>{
         await crearVenta({
             
             IDventa: nuevaVenta.IDventa,
+            IDCliente: nuevaVenta.IDCliente,
+            Cliente: nuevaVenta.Cliente,
             Vendedor: nuevaVenta.Vendedor,
             Producto: nuevaVenta.Producto,
             Valor: nuevaVenta.Valor
@@ -250,15 +290,25 @@ const FormularioCreacionVentas = ({setMostrarTabla}) =>{
     }
 
     return(
-        <div className='flex flex-col items-center justify-center h-full w-full'>
+        <div className='flex flex-col items-center justify-between p-0.1'>
             <BarraTitulo>
-                Registro nuevo venta
+                Registro nueva venta
             </BarraTitulo>
             <form ref={form} onSubmit={submitForm} className='grid grid-rows-1 w-96 border border-gray-600 bg-blue-200 m-2'>
                 <label className='text-center font-extrabold'>Registre su venta aquí..</label>
                 <label className='flex flex-col' htmlFor=" IDventa">
                     IDVenta
                     <input name='IDventa' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type='number' min={1001} max={9999} placeholder="1001" 
+                     required/>
+                </label>
+                <label className='flex flex-col' htmlFor="IDCliente">
+                    IDCliente
+                    <input name='IDCliente' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="number" placeholder="1049875123" 
+                     required/>
+                </label>
+                <label className='flex flex-col' htmlFor="Cliente">
+                    Cliente
+                    <input name='Cliente' className='bg-white border border-gray-600 p-2 rounded-lg m-2' type="text" placeholder="Juan Gonzalez"
                      required/>
                 </label>
                 <label className='flex flex-col' htmlFor="Vendedor">
