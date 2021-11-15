@@ -19,7 +19,7 @@ function App() {
     <Auth0Provider 
     domain="ventas-misiontic.us.auth0.com" 
     clientId="3rfEJuOcWXxkmNFsQJXjZ06p2VCNjYPl" 
-    redirectUri='https://polar-sea-28372.herokuapp.com'
+    redirectUri='http://localhost:3000'
     audience="Api-Auth-TiendaTec">  
       <div>
         <Router>

@@ -1,6 +1,6 @@
 import axios from 'axios'
-//const baseURL = "http://localhost:5000"
-const baseURL = 'https://thawing-springs-56523.herokuapp.com';
+const baseURL = "http://localhost:5000"
+//const baseURL = 'https://thawing-springs-56523.herokuapp.com';
 
 //CRUD PARA PRODUCTOS
 const getToken = () => {
@@ -19,7 +19,7 @@ const getToken = () => {
   };
 
 
-export const crearProducto= async(data, succesCallback,errorCallback)=>{
+export const crearProducto= async(data, succesCallback,errorCallback)=>{//
     const options = {
         method: 'POST',
         url: `${baseURL}/Productos/`,
